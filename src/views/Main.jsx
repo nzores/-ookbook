@@ -1,15 +1,14 @@
 const React = require('react');
 
 const Layout = require('./Layout');
-
 const Registration = require('./Register');
-
 const Login = require('./Login');
+const Navbar = require('./navbar');
 
-function Main(props) {
-  const { plainCoockbooks: coockbook } = props;
+function Main({ coockbook }) {
   return (
     <Layout>
+      <Navbar />
       <h1>Main Page</h1>
       {coockbook &&
         coockbook.map(({ id, title, text }) => (
@@ -18,8 +17,10 @@ function Main(props) {
             <h3>{text}</h3>
           </div>
         ))}
-      <Registration />
-      <Login />
+      <div id="modalWin">
+        <Registration />
+        <Login />
+      </div>
     </Layout>
   );
 }
