@@ -1,7 +1,7 @@
+'use strict';
 const {
-  Model,
+  Model
 } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   class TemporalRecipe extends Model {
     /**
@@ -9,17 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User }) {
-      TemporalRecipe.belongsTo(User, { foreignKey: 'userId' });
+    static associate(models) {
+      // define association here
     }
   }
   TemporalRecipe.init({
     name: DataTypes.STRING,
-    ingridients: DataTypes.TEXT,
-    timeToCook: DataTypes.INTEGER,
-    instruction: DataTypes.TEXT,
-    userId: DataTypes.INTEGER,
-    recipeApiId: DataTypes.INTEGER,
+    ingredientsCount: DataTypes.INTEGER,
+    cookingTime: DataTypes.INTEGER,
+    image: DataTypes.TEXT,
+    recipeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'TemporalRecipe',
