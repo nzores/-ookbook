@@ -16,5 +16,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'react/prop-types': 'off',
     'import/prefer-default-export': 'off',
+    'consistent-return': 'off',
   },
 };

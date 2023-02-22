@@ -3,12 +3,13 @@ const React = require('react');
 const Layout = require('./Layout');
 const Registration = require('./Register');
 const Login = require('./Login');
-const Navbar = require('./navbar');
+const Navbar = require('./Navbar');
 
-function Main({ coockbook }) {
+function Main({ username, userid, coockbook }) {
+  console.log('username: ', username);
   return (
     <Layout>
-      <Navbar />
+      <Navbar username={username} userid={userid} />
       <h1>Main Page</h1>
       {coockbook &&
         coockbook.map(({ id, title, text }) => (
