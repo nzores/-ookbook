@@ -14,6 +14,7 @@ function Layout({ children }) {
           crossOrigin="anonymous"
         />
         <script defer src="js/application.js" />
+        <script defer src="css/style.css" />
         <title>Document</title>
       </head>
       <body>{children}</body>
