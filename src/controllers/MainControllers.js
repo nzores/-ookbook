@@ -16,9 +16,9 @@ exports.MainPage = async (req, res) => {
 
   // записываем результат ответа от апи
   const data = await response.json();
-
+  const userid = req.session?.user?.id;
   console.log(data)
+  render(Main, { userid }, res);
+}
 
 
-  render(Main, {}, res);
-};
