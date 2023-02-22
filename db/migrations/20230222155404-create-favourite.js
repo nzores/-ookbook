@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('TemporalRecipes', {
+    await queryInterface.createTable('Favourites', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,20 +12,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      ingridients: {
+      ingredients: {
         type: Sequelize.TEXT,
       },
-      timeToCook: {
+      cookingTime: {
         type: Sequelize.INTEGER,
       },
-      instruction: {
+      instructions: {
+        type: Sequelize.TEXT,
+      },
+      image: {
         type: Sequelize.TEXT,
       },
       userId: {
         type: Sequelize.INTEGER,
         references: { model: 'Users', key: 'id' },
       },
-      recipeApiId: {
+      recipeId: {
         type: Sequelize.INTEGER,
       },
       createdAt: {
@@ -39,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('TemporalRecipes');
+    await queryInterface.dropTable('Favourites');
   },
 };
