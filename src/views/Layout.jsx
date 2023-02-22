@@ -15,6 +15,7 @@ function Layout({ children }) {
         />
         <script defer src="js/application.js" />
         <script defer src="css/style.css" />
+
         <title>Document</title>
       </head>
       <body>{children}</body>

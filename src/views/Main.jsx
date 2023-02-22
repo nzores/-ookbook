@@ -1,4 +1,4 @@
-const React = require("react");
+const React = require('react');
 
 const Layout = require('./Layout');
 const Registration = require('./Register');
@@ -11,8 +11,8 @@ function Main({ username, userid, coockbook }) {
     <Layout>
       <Navbar username={username} userid={userid} />
       <h1>Main Page</h1>
-      {coockbook &&
-        coockbook.map(({ id, title, text }) => (
+      {coockbook
+        && coockbook.map(({ id, title, text }) => (
           <div key={id} id={id}>
             <h2>{title}</h2>
             <h3>{text}</h3>
