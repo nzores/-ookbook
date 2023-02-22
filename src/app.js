@@ -15,6 +15,10 @@ const dbConnect = require('../db/config/dbconnect');
 const indexRouter = require('./routes/indexRoute');
 const recipeRouter = require('./routes/recipeRouter');
 
+//routs import
+const MainRoutes = require('./routes/Main.Routes');
+const UserPage = require('./routes/UserPage.Routes');
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -76,6 +80,7 @@ app.use((err, req, res) => {
     error = {};
   }
 
+
   // Записываем информацию об ошибке и сам объект ошибки в специальные переменные,
   // доступные на сервере глобально, но только в рамках одного HTTP - запроса.
   res.locals.message = err.message;
@@ -90,6 +95,11 @@ app.use((err, req, res) => {
   res.write('<!DOCTYPE html>');
   res.end(html);
 });
+
+app.use('/', MainRoutes);
+// app.use('/auth', authRouter);
+app.use('/user', UserPage);
+
 
 app.listen(PORT, () => {
   console.log(`server started on http://localhost:${PORT}`);
