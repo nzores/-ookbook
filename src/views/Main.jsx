@@ -10,13 +10,14 @@ function Main(props) {
   const { plainCoockbooks: coockbook } = props;
   return (
     <Layout>
-    <h1>Main Page</h1>
-      {coockbook && coockbook.map(({ id, title, text }) => (
-        <div key={id} id={id}>
-          <h2>{title}</h2>
-          <h3>{text}</h3>
-        </div>
-      ))}
+      <h1>Main Page</h1>
+      {coockbook &&
+        coockbook.map(({ id, title, text }) => (
+          <div key={id} id={id}>
+            <h2>{title}</h2>
+            <h3>{text}</h3>
+          </div>
+        ))}
       <Registration />
       <Login />
     </Layout>
