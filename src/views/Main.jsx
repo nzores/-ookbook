@@ -1,9 +1,9 @@
-const React = require('react');
+const React = require("react");
 
-const Layout = require('./Layout');
-const Registration = require('./Register');
-const Login = require('./Login');
-const Navbar = require('./navbar');
+const Layout = require("./Layout");
+const Registration = require("./Register");
+const Login = require("./Login");
+const Navbar = require("./navbar");
 
 function Main({ coockbook }) {
   return (
@@ -21,6 +21,30 @@ function Main({ coockbook }) {
         <Registration />
         <Login />
       </div>
+      {/* <div className="d-flex justify-content-between">
+        {coockbook.map((el) => (
+          <Card
+            id="deckblock"
+            style={{
+              backgroundColor: "red",
+              backgroundAttachment: "fixed",
+            }}
+          >
+            <Card.Body className="d-flex flex-column justify-content-center">
+              <Card.Title style={{ cursor: "default" }}>
+                {" "}
+                <a
+                  href={`/recipe/${el.id}`}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  {el.name}
+                </a>
+              </Card.Title>
+              <Card.Text style={{ cursor: "default" }} />
+            </Card.Body>
+          </Card>
+        ))}
+      </div> */}
     </Layout>
   );
 }

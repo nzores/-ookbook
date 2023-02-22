@@ -2,8 +2,8 @@ const React = require('react');
 
 module.exports = function Navbar({ username, userId }) {
   return (
-    <nav className="clearfix mar-b-1" id="navbar">
-      <ul className="no-bullets no-margin no-padding right">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <ul className="navbar-nav mr-auto" >
         <li className="pipe-separate t-light-green left">
           <button className="nav-link" id="homeBtn" type="button">
             Главная
