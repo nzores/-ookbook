@@ -2,6 +2,10 @@ const React = require('react');
 
 const Layout = require('./Layout');
 
+const Registration = require('./Register');
+
+const Login = require('./Login');
+
 function Main(props) {
   const { plainCoockbooks: coockbook } = props;
   return (
@@ -13,6 +17,8 @@ function Main(props) {
           <h3>{text}</h3>
         </div>
       ))}
+      <Registration />
+      <Login />
     </Layout>
   );
 }
