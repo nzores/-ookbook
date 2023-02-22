@@ -15,6 +15,9 @@ const dbConnect = require('../db/config/dbconnect');
 const MainRoutes = require('./routes/Main.Routes');
 const UserPage = require('./routes/UserPage.Routes');
 const RecipePage = require('./routes/RecipesPage.Routes');
+const authRoutes = require('./routes/auth.Routes');
+
+const Error = require('./views/Error');
 
 const app = express();
 
@@ -45,10 +48,12 @@ app.use(session(sessionConfig));
 
 app.use((req, res, next) => {
   console.log('\n\x1b[33m', 'req.session.user :', req.session?.user);
+  res.locals.username = req.session?.user?.name
   next();
 });
 
 app.use('/', MainRoutes);
+app.use('/auth', authRoutes);
 app.use('/user', UserPage);
 app.use('/recipe', RecipePage);
 
@@ -58,7 +63,7 @@ app.use('/recipe', RecipePage);
 // код ошибки 404. Создаём небольшое middleware, которое генерирует соответствующую ошибку.
 app.use((req, res, next) => {
   const error = createError(
-    404,recipeId,
+    404,
     'Запрашиваемой страницы не существует на сервере.'
   );
   next(error);
