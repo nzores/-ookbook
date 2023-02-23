@@ -63,10 +63,7 @@ function Main({ username, recipes, userid }) {
         </div>
       </div>
 
-      <div id="modalWin">
-        <Registration />
-        <Login />
-      </div>
+      
     </Layout>
   );
 }
