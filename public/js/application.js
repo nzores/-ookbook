@@ -26,6 +26,7 @@ function scroller() {
 // hook the scroll handler to scroll event
 addEvent(wrapper, 'scroll', scroller);
 const message = document.createElement('p');
+
 const navbar = document.getElementById('navbar');
 
 const registerButton = document.getElementById('regBtn');
@@ -44,6 +45,45 @@ const formLogin = document.forms.login;
 
 const logindiv = document.getElementById('logindiv');
 const signupdiv = document.getElementById('signupdiv');
+
+const sortBtnParent = document.getElementById('sortButtons');
+
+const recipesContainer = document.getElementById('containerRecipes');
+
+let clickCount = 0;
+
+sortBtnParent?.addEventListener('click', async (event) => {
+  clickCount += 1;
+  while (recipesContainer.firstChild) {
+    recipesContainer.removeChild(recipesContainer.firstChild);
+  }
+  if (event.target.id === 'sortByIngredients') {
+    const response = await fetch('/recipes/showlist/sortByIngredients');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <h2>${el.name}</h2>
+      <h2>count ingrediants ${el.ingredientsCount}</h2>
+      <h2>cooking time ${el.cookingTime}</h2>
+      `;
+      recipesContainer.appendChild(card);
+    });
+  }
+  if (event.target.id === 'sortByCooking') {
+    const response = await fetch('/recipes/showlist/sortByCooking');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <h2>${el.name}</h2>
+      <h2>count ingrediants ${el.ingredientsCount}</h2>
+      <h2>cooking time ${el.cookingTime}</h2>
+      `;
+      recipesContainer.appendChild(card);
+    });
+  }
+});
 
 navbar?.addEventListener('click', async (e) => {
   if (e.target.id === 'entryBtn') {
