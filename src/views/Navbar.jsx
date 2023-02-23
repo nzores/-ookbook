@@ -1,47 +1,53 @@
-const React = require('react');
+const React = require("react");
 
 module.exports = function Navbar({ children, username, userid }) {
   return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
-       <div class="container-fluid">
-        <ul className="navbar-nav  ">
-          <li className="navbar-nav ">
-            <a className="navbar-brand" id="homeBtn" >
-              Главная
-            </a>
-          </li>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light' id='navbar'>
+      <a class='navbar-brand' href='#'>
+        <img
+          src='/favicon.ico'
+          height='50'
+          alt='Logo'
+          loading='lazy'
+          id='homeBtn'
+        />
+      </a>
+      {username ? <p className=''>Привет, {username}</p> : <></>}
+      <div class='container-fluid justify-content-end'>
+        <ul className='navbar-nav  '>
           {username ? (
             <>
-              <li className="navbar-nav">
-                <a className="navbar-brand" id="privateNote" href={`/user/${userid}`}>
+              <li className='navbar-nav '>
+                <a
+                  className='navbar-brand'
+                  id='privateNote'
+                  href={`/user/${userid}`}
+                >
                   Избранное
                 </a>
               </li>
-              <li className="navbar-brand">
-                <p className="">Привет, {username}</p>
-              </li>
-              <li className="navbar-nav">
-                <a className="navbar-brand" id="exitBtn" >
+              <li className='navbar-nav '>
+                <a className='navbar-brand text-danger' href='#' id='exitBtn'>
                   Выйти
                 </a>
               </li>
             </>
           ) : (
             <>
-              <li className="navbar-nav ">
-                <a className="navbar-brand " id="entryBtn"  >
+              <li className='navbar-nav '>
+                <a className='navbar-brand ' href='#' id='entryBtn'>
                   Войти
                 </a>
               </li>
-              <li className="navbar-nav">
-                <a className="navbar-brand" id="regBtn" >
+              <li className='navbar-nav '>
+                <a className='navbar-brand' href='#' id='regBtn'>
                   Регистрация
                 </a>
               </li>
             </>
           )}
         </ul>
-        </div>
-      </nav>
+      </div>
+    </nav>
   );
 };
