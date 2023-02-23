@@ -2,21 +2,13 @@ const React = require("react");
 
 const Layout = require("./Layout");
 
-function Recipe({ oneRecipeData,igredients}) {
+function Recipe({ oneRecipeData,igredients , username, userid}) {
   // const { oneRecipeData,igredients} = props;
   return (
-    <Layout>
-      <script defer src="css/style.css" />
-      <div className="card">
-        <div className="header">
-          <div className="icon">
-            <a href="#">
-              <i className="fa fa-heart-o" />
-            </a>
-          </div>
-        </div>
-        <div className="text">
-          <h1 className="food">{oneRecipeData[0].title}</h1>
+    <Layout username={username} userid={userid}>
+
+        <div class="container-md">
+        <h1 className="food">{oneRecipeData[0].title}</h1>
           <i className="fa fa-clock-o">cooking time : { oneRecipeData[0].readyInMinutes}</i>
           <i className="fa fa-users"> servings: {oneRecipeData[0].servings}</i>
           <img src={oneRecipeData[0].image}></img>
@@ -29,10 +21,6 @@ function Recipe({ oneRecipeData,igredients}) {
             {oneRecipeData[0].instructions}
           </p>
         </div>
-        <a href="#" className="btn">
-          Let's Cook!
-        </a>
-      </div>
     </Layout>
   );
 }

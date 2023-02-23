@@ -8,8 +8,8 @@ const Navbar = require('./Navbar');
 function Main({ username, recipes, userid }) {
   console.log('username: ', username);
   return (
-    <Layout>
-      <Navbar username={username} userid={userid} />
+    <Layout username={username} userid={userid}>
+      {/* <Navbar username={username} userid={userid} /> */}
       <h1>Main Page</h1>
       <div id="sortButtons">
         <button id="sortByIngredients">sort by count inredients</button>
