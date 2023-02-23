@@ -43,11 +43,10 @@ exports.MainPage = async (req, res) => {
 
     const arrJson = newObj.recipes;
 
-    let num1 = Math.floor(Math.random() * 51); // generates a random integer between 0 and 50 inclusive
-    let num2 = Math.floor(Math.random() * 50) + 51; // generates a random integer between 51 and 100 inclusive
-    // let lag = Math.floor(Math.random() * 21); // generates a random integer between 0 and 20 inclusive
+    let num1 = Math.floor(Math.random() * 51);
+    let num2 = Math.floor(Math.random() * 50) + 51;
 
-    num2 = Math.min(num2, num1 + 20); // sets num2 to be within 20 of num1 if it would otherwise exceed that limit
+    num2 = Math.min(num2, num1 + 20);
     num1 = Math.max(num1, num2 - 20);
 
     const arrFromJson = arrJson.slice(num1, num2);
@@ -92,7 +91,9 @@ exports.MainPage = async (req, res) => {
       return el;
     });
 
-    recipes.forEach(async (el) => {
+    const clearRecipes = recipes.filter((el) => el.image !== undefined);
+
+    clearRecipes.forEach(async (el) => {
       await TemporalRecipe.create(el);
     });
 
