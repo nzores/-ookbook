@@ -2,7 +2,6 @@ const React = require('react');
 
 module.exports = function Navbar({ children, username, userid }) {
   return (
-    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
         <ul className="navbar-nav mr-auto">
           <li className="pipe-separate t-light-green left">
@@ -42,7 +41,5 @@ module.exports = function Navbar({ children, username, userid }) {
           )}
         </ul>
       </nav>
-      {children}
-    </div>
   );
 };

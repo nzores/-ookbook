@@ -5,6 +5,7 @@ const RecipePage = require("../views/Recipe");
 
 exports.Recipe = async (req, res) => {
   const userid = req.session?.user?.id;
+  const username = req.session?.user?.name;
 
 
 //   const myApiKey = process.env.MY_API_KEY;
@@ -47,5 +48,5 @@ exports.Recipe = async (req, res) => {
   })
  
 
-  render(RecipePage, {oneRecipeData, igredients}, res);
+  render(RecipePage, {oneRecipeData, igredients, userid,username}, res);
 };
