@@ -2,8 +2,8 @@ const React = require("react");
 
 const Layout = require("./Layout");
 
-function Recipe(props) {
-  const { plainCoockbooks: coockbook } = props;
+function Recipe({ oneRecipeData,igredients}) {
+  // const { oneRecipeData,igredients} = props;
   return (
     <Layout>
       <script defer src="css/style.css" />
@@ -16,32 +16,17 @@ function Recipe(props) {
           </div>
         </div>
         <div className="text">
-          <h1 className="food">Chinese Noodles</h1>
-          <i className="fa fa-clock-o"> 15 Mins</i>
-          <i className="fa fa-users"> Serves 2</i>
-
+          <h1 className="food">{oneRecipeData[0].title}</h1>
+          <i className="fa fa-clock-o">cooking time : { oneRecipeData[0].readyInMinutes}</i>
+          <i className="fa fa-users"> servings: {oneRecipeData[0].servings}</i>
+          <img src={oneRecipeData[0].image}></img>
           <div className="stars">
-            <li>
-              <a href="#">
-                <i className="fa fa-star" />
-              </a>
-              <a href="#">
-                <i className="fa fa-star" />
-              </a>
-              <a href="#">
-                <i className="fa fa-star" />
-              </a>
-              <a href="#">
-                <i className="fa fa-star" />
-              </a>
-              <a href="#">
-                <i className="fa fa-star-o" />
-              </a>
-            </li>
+            <ul>
+              {igredients.map((el) => <li>{el}</li>)}
+            </ul>
           </div>
           <p className="info">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum,
-            temporibus.
+            {oneRecipeData[0].instructions}
           </p>
         </div>
         <a href="#" className="btn">
