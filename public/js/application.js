@@ -1,35 +1,33 @@
-// we will add this content, replace for anything you want to add
-const more = '<div style="height: 1000px; background: #EEE;"></div>';
+// // we will add this content, replace for anything you want to add
+// const more = '<div style="height: 1000px; background: #EEE;"></div>';
 
-const wrapper = document.getElementsByClassName('card');
-const content = document.getElementsByClassName('icon');
-const test = document.getElementsByClassName('text');
-content.innerHTML = more;
+// const wrapper = document.getElementsByClassName('card');
+// const content = document.getElementsByClassName('icon');
+// const test = document.getElementsByClassName('text');
+// content.innerHTML = more;
 
-// cross browser addEvent, today you can safely use just addEventListener
-function addEvent(obj, ev, fn) {
-  if (obj.addEventListener) obj.addEventListener(ev, fn, false);
-  else if (obj.attachEvent) obj.attachEvent(`on${ev}`, fn);
-}
+// // cross browser addEvent, today you can safely use just addEventListener
+// function addEvent(obj, ev, fn) {
+//   if (obj.addEventListener) obj.addEventListener(ev, fn, false);
+//   else if (obj.attachEvent) obj.attachEvent(`on${ev}`, fn);
+// }
 
-// this is the scroll event handler
-function scroller() {
-  // print relevant scroll info
-  test.innerHTML = `${wrapper.scrollTop}+${wrapper.offsetHeight}+100>${content.offsetHeight}`;
+// // this is the scroll event handler
+// function scroller() {
+//   // print relevant scroll info
+//   test.innerHTML = `${wrapper.scrollTop}+${wrapper.offsetHeight}+100>${content.offsetHeight}`;
 
-  // add more contents if user scrolled down enough
-  if (wrapper.scrollTop + wrapper.offsetHeight + 100 > content.offsetHeight) {
-    content.innerHTML += more;
-  }
-}
+//   // add more contents if user scrolled down enough
+//   if (wrapper.scrollTop + wrapper.offsetHeight + 100 > content.offsetHeight) {
+//     content.innerHTML += more;
+//   }
+// }
 
-// hook the scroll handler to scroll event
-addEvent(wrapper, 'scroll', scroller);
+// // hook the scroll handler to scroll event
+// addEvent(wrapper, 'scroll', scroller);
 const message = document.createElement('p');
 
 const navbar = document.getElementById('navbar');
-
-const registerButton = document.getElementById('regBtn');
 
 const entryModalWindow = document.querySelector('#modalOne');
 const regModalWindow = document.querySelector('#modalTwo');
@@ -50,24 +48,31 @@ const sortBtnParent = document.getElementById('sortButtons');
 
 const recipesContainer = document.getElementById('containerRecipes');
 
-let clickCount = 0;
-
 sortBtnParent?.addEventListener('click', async (event) => {
-  clickCount += 1;
   while (recipesContainer.firstChild) {
     recipesContainer.removeChild(recipesContainer.firstChild);
   }
   if (event.target.id === 'sortByIngredients') {
     const response = await fetch('/recipes/showlist/sortByIngredients');
-    console.log('response: ', response);
     const sortedRecipes = await response.json();
     sortedRecipes.forEach((el) => {
       const card = document.createElement('div');
       card.innerHTML = `
-      <h2>${el.name}</h2>
-      <h2>count ingrediants ${el.ingredientsCount}</h2>
-      <h2>cooking time ${el.cookingTime}</h2>
-      `;
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
       recipesContainer.appendChild(card);
     });
   }
@@ -77,10 +82,21 @@ sortBtnParent?.addEventListener('click', async (event) => {
     sortedRecipes.forEach((el) => {
       const card = document.createElement('div');
       card.innerHTML = `
-      <h2>${el.name}</h2>
-      <h2>count ingrediants ${el.ingredientsCount}</h2>
-      <h2>cooking time ${el.cookingTime}</h2>
-      `;
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
       recipesContainer.appendChild(card);
     });
   }
@@ -89,20 +105,34 @@ sortBtnParent?.addEventListener('click', async (event) => {
 window?.addEventListener('scroll', async () => {
   try {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      // while (recipesContainer.firstChild) {
-      //   recipesContainer.removeChild(recipesContainer.firstChild);
-      // }
       const response = await fetch('/recipes/more');
-  
+
       const additionalRecipes = await response.json();
+      // const spinner = document.getElementById('spinner');
+      // spinner.style.display = 'block';
       additionalRecipes.forEach((el) => {
         const card = document.createElement('div');
         card.innerHTML = `
-          <h2>${el.name}</h2>
-          <h2>count ingrediants ${el.ingredientsCount}</h2>
-          <h2>cooking time ${el.cookingTime}</h2>
+        <div class="col-sm">
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+        <img src=${el.image}  class="card-img-top"
+        alt="" />
+        <div class="card-body">
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+        <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
+        <p>Cooking time ${el.cookingTime} min</p>
+        <button type="button" class="btn btn-outline-primary">Unlike</button>
+        <button type="button" class="btn btn-primary">Like</button>
+        
+        </div>
+        </div>
+        </div>
           `;
+
         recipesContainer.appendChild(card);
+        // setTimeout(() => {
+        //   spinner.style.display = 'none';
+        // }, 1500);
       });
     }
   } catch (error) {
@@ -131,7 +161,6 @@ navbar?.addEventListener('click', async (e) => {
 });
 
 modalWin?.addEventListener('click', async (e) => {
-  // console.log(1111)
   if (e.target === regModalWindow || e.target === closeButton[0]) {
     regModalWindow.style.display = 'none';
   }

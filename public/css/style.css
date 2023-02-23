@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
 bg: url('https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg')
   no-repeat center;
-food: url("http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg")
+food: url('http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg')
   no-repeat center;
 
-
-font: "Roboto", sans-serif;
+font: 'Roboto', sans-serif;
 
 // COLORS
 white: #fff;
@@ -106,4 +104,21 @@ body {
       transition: 250ms;
     }
   }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 8;
+  left: 30%;
+  top: 30%;
+  width: 30%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  margin: 50px auto;
+  max-width: 30%;
 }
