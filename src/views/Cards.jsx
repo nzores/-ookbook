@@ -1,8 +1,8 @@
-const React = require("react");
+const React = require('react');
 
-const Layout = require("./Layout");
+const Layout = require('./Layout');
 
-function Recipe(props) {
+function Card(props) {
   const { plainCoockbooks: coockbook } = props;
   return (
     <Layout>
@@ -24,4 +24,4 @@ function Recipe(props) {
     </Layout>
   );
 }
-module.exports = Recipe;
+module.exports = Card;
