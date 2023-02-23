@@ -1,30 +1,3 @@
-// // we will add this content, replace for anything you want to add
-// const more = '<div style="height: 1000px; background: #EEE;"></div>';
-
-// const wrapper = document.getElementsByClassName('card');
-// const content = document.getElementsByClassName('icon');
-// const test = document.getElementsByClassName('text');
-// content.innerHTML = more;
-
-// // cross browser addEvent, today you can safely use just addEventListener
-// function addEvent(obj, ev, fn) {
-//   if (obj.addEventListener) obj.addEventListener(ev, fn, false);
-//   else if (obj.attachEvent) obj.attachEvent(`on${ev}`, fn);
-// }
-
-// // this is the scroll event handler
-// function scroller() {
-//   // print relevant scroll info
-//   test.innerHTML = `${wrapper.scrollTop}+${wrapper.offsetHeight}+100>${content.offsetHeight}`;
-
-//   // add more contents if user scrolled down enough
-//   if (wrapper.scrollTop + wrapper.offsetHeight + 100 > content.offsetHeight) {
-//     content.innerHTML += more;
-//   }
-// }
-
-// // hook the scroll handler to scroll event
-// addEvent(wrapper, 'scroll', scroller);
 const message = document.createElement('p');
 
 const navbar = document.getElementById('navbar');
@@ -47,6 +20,17 @@ const signupdiv = document.getElementById('signupdiv');
 const sortBtnParent = document.getElementById('sortButtons');
 
 const recipesContainer = document.getElementById('containerRecipes');
+
+recipesContainer?.addEventListener('click', async (event) => {
+  const recipeId = event.target.dataset.recipe;
+  const cookingTime = event.target.dataset.timecook;
+  const favourite = await fetch('/user/addFavourite', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ recipeId, cookingTime }),
+  });
+
+});
 
 sortBtnParent?.addEventListener('click', async (event) => {
   while (recipesContainer.firstChild) {
@@ -108,8 +92,6 @@ window?.addEventListener('scroll', async () => {
       const response = await fetch('/recipes/more');
 
       const additionalRecipes = await response.json();
-      // const spinner = document.getElementById('spinner');
-      // spinner.style.display = 'block';
       additionalRecipes.forEach((el) => {
         const card = document.createElement('div');
         card.innerHTML = `
@@ -130,9 +112,6 @@ window?.addEventListener('scroll', async () => {
           `;
 
         recipesContainer.appendChild(card);
-        // setTimeout(() => {
-        //   spinner.style.display = 'none';
-        // }, 1500);
       });
     }
   } catch (error) {
@@ -141,7 +120,6 @@ window?.addEventListener('scroll', async () => {
 });
 
 navbar?.addEventListener('click', async (e) => {
-  console.log(e.target.id)
   if (e.target.id === 'entryBtn') {
     entryModalWindow.style.display = 'block';
   }

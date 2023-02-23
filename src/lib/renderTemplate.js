@@ -3,7 +3,7 @@ const React = require('react');
 
 const render = (reactElement, properties, response) => {
   properties.username = response.locals.username; // добавляем имя пользователя в пропсы, по ключу username, для компонента Layout
-  console.log('properties.username: ', properties.username);
+
   const reactEl = React.createElement(reactElement, properties);
   const html = ReactDomServer.renderToStaticMarkup(reactEl);
   response.write('<!DOCTYPE html>');
