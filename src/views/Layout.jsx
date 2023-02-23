@@ -19,7 +19,7 @@ function Layout({ children,username,userid }) {
 
         <title>Document</title>
       </head>
-      <Navbar username={username} userid={userid}/>
+      <Navbar className="d-flex justify-content-center" username={username} userid={userid}/>
       <body>{children}</body>
     </html>
   );

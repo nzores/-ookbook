@@ -8,36 +8,24 @@ const Navbar = require('./Navbar');
 function Main({ username, recipes, userid }) {
   console.log('username: ', username);
   return (
-    <Layout username={username} userid={userid}>
-      {/* <Navbar username={username} userid={userid} /> */}
+    <Layout>
+      <Navbar username={username} userid={userid} />
       <h1>Main Page</h1>
       <div id="sortButtons">
         <button id="sortByIngredients">sort by count inredients</button>
         <button id="sortByCooking">sort by cooking time</button>
       </div>
-      <div class="container text-center" id="containerRecipes">
-      <div class="row align-items-start">
+      <div id="containerRecipes">
         {recipes &&
           recipes.map((el) => (
-            <div class="col-sm">
-            <div class="card" key={el.recipeId} style={{width: "18rem"}} data-recipe={el.recipeId}>
-      <img src={el.image}  class="card-img-top"
-        alt="" />
-      <div class="card-body">
-        {/* <h2 class="card-title" >{el.name}</h2> */}
-        <a href={`/recipe/${el.recipeId}`}><h2 class="card-title" >{el.name}</h2></a>
-        {/* <h2>{el.name}</h2> */}
-        <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
-        <p>Cooking time {el.cookingTime} min</p>
-        {/* <h3>{el.image}</h3> */}
-        <button type="button" class="btn btn-outline-primary">Unlike</button>
-        <button type="button" class="btn btn-primary">Like</button>
-        
-      </div>
-    </div>
-    </div>
+            <div key={el.recipeId} data-recipe={el.recipeId}>
+              <h2>{el.name}</h2>
+              <h2>count ingrediants {el.ingredientsCount} unit/s</h2>
+              <h2>cooking time {el.cookingTime} min</h2>
+              {/* <h3>{el.image}</h3> */}
+              <a href={`/recipe/${el.recipeId}`}>click</a>
+            </div>
           ))}
-          </div>
       </div>
       <div id="modalWin">
         <Registration />
