@@ -10,10 +10,12 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       ingredients: {
         type: Sequelize.TEXT,
+      },
+      ingredientsCount: {
+        type: Sequelize.INTEGER,
       },
       cookingTime: {
         type: Sequelize.INTEGER,
@@ -30,8 +32,6 @@ module.exports = {
       },
       recipeId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
       },
       createdAt: {
         allowNull: false,

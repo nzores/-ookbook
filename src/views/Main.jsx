@@ -34,6 +34,7 @@ function Main({ username, recipes, userid }) {
                       type="button"
                       data-recipe={el.recipeId}
                       data-timecook={el.cookingTime}
+                      data-ingredientsCount={el.ingredientsCount}
                       // className="btn btn-primary"
                       className="btn btn-primary disabled"
                       data-bs-toggle="button"

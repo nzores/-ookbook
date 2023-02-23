@@ -6,12 +6,12 @@ function UserPage({ username, recipes }) {
   return (
     <Layout username={username}>
       <h1>USERPAGE</h1>
-      <div id="sortButtons">
-        <button id="sortByIngredients">sort by count inredients</button>
-        <button id="sortByCooking">sort by cooking time</button>
+      <div id="sortButtonsFav">
+        <button id="sortByIngredientsFav">sort by count inredients</button>
+        <button id="sortByCookingFav">sort by cooking time</button>
       </div>
       <div className="container text-center">
-        <div className="row align-items-start" id="containerRecipes">
+        <div className="row align-items-start" id="containerRecipesFav">
           {recipes &&
             recipes.map((el) => (
               <div className="col-sm">
