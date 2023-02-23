@@ -23,6 +23,7 @@ function Main({ username, recipes, userid }) {
               <h2>count ingrediants {el.ingredientsCount} unit/s</h2>
               <h2>cooking time {el.cookingTime} min</h2>
               {/* <h3>{el.image}</h3> */}
+              <a href={`/recipe/${el.recipeId}`}>click</a>
             </div>
           ))}
       </div>
