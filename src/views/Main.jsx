@@ -5,19 +5,27 @@ const Registration = require('./Register');
 const Login = require('./Login');
 const Navbar = require('./Navbar');
 
-function Main({ username, userid, coockbook }) {
+function Main({ username, recipes, userid }) {
   console.log('username: ', username);
   return (
     <Layout>
       <Navbar username={username} userid={userid} />
       <h1>Main Page</h1>
-      {coockbook
-        && coockbook.map(({ id, title, text }) => (
-          <div key={id} id={id}>
-            <h2>{title}</h2>
-            <h3>{text}</h3>
-          </div>
-        ))}
+      <div id="sortButtons">
+        <button id="sortByIngredients">sort by count inredients</button>
+        <button id="sortByCooking">sort by cooking time</button>
+      </div>
+      <div id="containerRecipes">
+        {recipes &&
+          recipes.map((el) => (
+            <div key={el.recipeId} data-recipe={el.recipeId}>
+              <h2>{el.name}</h2>
+              <h2>count ingrediants {el.ingredientsCount} unit/s</h2>
+              <h2>cooking time {el.cookingTime} min</h2>
+              {/* <h3>{el.image}</h3> */}
+            </div>
+          ))}
+      </div>
       <div id="modalWin">
         <Registration />
         <Login />
