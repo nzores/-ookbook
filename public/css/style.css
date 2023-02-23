@@ -1,26 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-// VARIABLES
-$bg: url('https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg')
+
+bg: url('https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg')
   no-repeat center;
-$food: url('http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg')
+food: url("http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg")
   no-repeat center;
 
-// FONT
-$font: 'Roboto', sans-serif;
+
+font: "Roboto", sans-serif;
 
 // COLORS
-$white: #fff;
-$black: #212129;
-$gray: #9b9b9b;
-$heart: #17bebb;
-$star: #ffe500;
-$button: #ef3e36;
+white: #fff;
+black: #212129;
+gray: #9b9b9b;
+heart: #17bebb;
+star: #ffe500;
+button: #ef3e36;
 
 * {
   margin: 0;
   padding: 0;
-  font-family: $font;
+  font-family: font;
   list-style-type: none;
   text-decoration: none;
   -webkit-box-sizing: border-box;
@@ -39,35 +39,35 @@ body {
 }
 
 body {
-  background: $bg;
+  background: bg;
 }
 
 .card {
   position: relative;
-  background: $white;
+  background: white;
   max-width: 500px;
   margin: 20px auto;
   box-shadow: 0px 0px 30px 2px #000;
   .header {
-    background: $food;
+    background: food;
     background-size: cover;
     min-height: 350px;
     .icon a .fa-heart-o {
       position: absolute;
       left: 85%;
       bottom: 30.7%;
-      background: $heart;
-      color: $white;
+      background: heart;
+      color: white;
       font-size: 1.3em;
       font-weight: bold;
       padding: 15px;
       border-radius: 50%;
-      box-shadow: 0px 5px 30px 1px $heart;
+      box-shadow: 0px 5px 30px 1px heart;
     }
   }
   .text {
     .food {
-      color: $black;
+      color: black;
       text-align: left;
       font-weight: normal;
       text-transform: uppercase;
@@ -75,17 +75,17 @@ body {
       margin: 5px 30px;
     }
     .fa-clock-o {
-      color: $gray;
+      color: gray;
       margin: 0 30px;
     }
     .fa-users {
-      color: $gray;
+      color: gray;
     }
   }
   .stars {
     margin: 10px 30px;
     li a i {
-      color: $star;
+      color: star;
     }
   }
   .info {
@@ -93,8 +93,8 @@ body {
   }
   a.btn {
     display: block;
-    background: $button;
-    color: $white;
+    background: button;
+    color: white;
     position: relative;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -102,7 +102,7 @@ body {
     padding: 10px;
     transition: 250ms;
     &:hover {
-      background: $heart;
+      background: heart;
       transition: 250ms;
     }
   }
