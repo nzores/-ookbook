@@ -59,6 +59,7 @@ sortBtnParent?.addEventListener('click', async (event) => {
   }
   if (event.target.id === 'sortByIngredients') {
     const response = await fetch('/recipes/showlist/sortByIngredients');
+    console.log('response: ', response);
     const sortedRecipes = await response.json();
     sortedRecipes.forEach((el) => {
       const card = document.createElement('div');
@@ -82,6 +83,30 @@ sortBtnParent?.addEventListener('click', async (event) => {
       `;
       recipesContainer.appendChild(card);
     });
+  }
+});
+
+window?.addEventListener('scroll', async () => {
+  try {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      // while (recipesContainer.firstChild) {
+      //   recipesContainer.removeChild(recipesContainer.firstChild);
+      // }
+      const response = await fetch('/recipes/more');
+  
+      const additionalRecipes = await response.json();
+      additionalRecipes.forEach((el) => {
+        const card = document.createElement('div');
+        card.innerHTML = `
+          <h2>${el.name}</h2>
+          <h2>count ingrediants ${el.ingredientsCount}</h2>
+          <h2>cooking time ${el.cookingTime}</h2>
+          `;
+        recipesContainer.appendChild(card);
+      });
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 
