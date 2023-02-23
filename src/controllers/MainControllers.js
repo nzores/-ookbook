@@ -76,7 +76,7 @@ exports.MainPage = async (req, res) => {
     };
     return el;
   });
-  console.log('arrayForDBFavourite: ', arrayForDBFavourite);
+  // console.log('arrayForDBFavourite: ', arrayForDBFavourite);
   
 
 
