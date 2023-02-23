@@ -141,6 +141,7 @@ window?.addEventListener('scroll', async () => {
 });
 
 navbar?.addEventListener('click', async (e) => {
+  console.log(e.target.id)
   if (e.target.id === 'entryBtn') {
     entryModalWindow.style.display = 'block';
   }
