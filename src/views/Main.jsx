@@ -77,10 +77,7 @@ function Main({ username, recipes, userid }) {
 >>>>>>> 221fb7b57883ade198b739497abce2c78b96ef64
       </div>
 
-      <div id="modalWin">
-        <Registration />
-        <Login />
-      </div>
+      
     </Layout>
   );
 }

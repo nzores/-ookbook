@@ -1,7 +1,9 @@
 const React = require('react');
 const Navbar = require('./Navbar');
+const Registration = require('./Register');
+const Login = require('./Login');
 
-function Layout({ children,username,userid }) {
+function Layout({ children, username, userid }) {
   return (
     <html lang="en">
       <head>
@@ -14,13 +16,19 @@ function Layout({ children,username,userid }) {
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossOrigin="anonymous"
         />
+        <link rel="stylesheet" href="/css/style.css" />
         <script defer src="/js/application.js" />
-        <script defer src="/css/style.css" />
 
-        <title>Document</title>
+        <title>Recipes</title>
       </head>
-      <Navbar className="d-flex justify-content-center" username={username} userid={userid}/>
-      <body>{children}</body>
+      <Navbar username={username} userid={userid} />
+      <body>
+        {children}
+        <div id="modalWin">
+          <Registration />
+          <Login />
+        </div>
+      </body>
     </html>
   );
 }
