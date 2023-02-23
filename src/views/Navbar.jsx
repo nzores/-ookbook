@@ -2,44 +2,46 @@ const React = require('react');
 
 module.exports = function Navbar({ children, username, userid }) {
   return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-        <ul className="navbar-nav mr-auto">
-          <li className="pipe-separate t-light-green left">
-            <button className="nav-link" id="homeBtn" type="button">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+       <div class="container-fluid">
+        <ul className="navbar-nav  ">
+          <li className="navbar-nav ">
+            <a className="navbar-brand" id="homeBtn" >
               Главная
-            </button>
+            </a>
           </li>
           {username ? (
             <>
-              <li className="pipe-separate t-light-green left">
-                <a className="nav-link" id="privateNote" href={`/user/${userid}`}>
+              <li className="navbar-nav">
+                <a className="navbar-brand" id="privateNote" href={`/user/${userid}`}>
                   Избранное
                 </a>
               </li>
-              <li className="pipe-separate t-light-green left">
-                <p className="nav-link">Привет, {username}</p>
+              <li className="navbar-brand">
+                <p className="">Привет, {username}</p>
               </li>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="exitBtn" type="button">
+              <li className="navbar-nav">
+                <a className="navbar-brand" id="exitBtn" >
                   Выйти
-                </button>
+                </a>
               </li>
             </>
           ) : (
             <>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="entryBtn" type="button">
+              <li className="navbar-nav ">
+                <a className="navbar-brand " id="entryBtn"  >
                   Войти
-                </button>
+                </a>
               </li>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="regBtn" type="button">
+              <li className="navbar-nav">
+                <a className="navbar-brand" id="regBtn" >
                   Регистрация
-                </button>
+                </a>
               </li>
             </>
           )}
         </ul>
+        </div>
       </nav>
   );
 };
