@@ -16,7 +16,9 @@ const MainRoutes = require('./routes/Main.Routes');
 const UserPage = require('./routes/UserPage.Routes');
 const RecipePage = require('./routes/RecipesPage.Routes');
 const authRoutes = require('./routes/auth.Routes');
-
+/// //////////!!!!!
+const GoogleRouter = require('./routes/google.router');
+require('../googleAuth');
 const Error = require('./views/Error');
 
 const app = express();
@@ -37,10 +39,10 @@ const sessionConfig = {
   store: new FileStore({}),
   secret: process.env.COOKIE_SECRET,
   resave: false,
-  saveUninitialized: false, 
+  saveUninitialized: false,
   cookie: {
-    secure: process.env.NODE_ENV === 'development', 
-    maxAge: 1000 * 60 * 60 * 24 * 10, 
+    secure: process.env.NODE_ENV === 'development',
+    maxAge: 1000 * 60 * 60 * 24 * 10,
   },
 };
 
@@ -48,7 +50,7 @@ app.use(session(sessionConfig));
 
 app.use((req, res, next) => {
   console.log('\n\x1b[33m', 'req.session.user :', req.session?.user);
-  res.locals.username = req.session?.user?.name
+  res.locals.username = req.session?.user?.name;
   next();
 });
 
@@ -56,7 +58,8 @@ app.use('/', MainRoutes);
 app.use('/auth', authRoutes);
 app.use('/user', UserPage);
 app.use('/recipe', RecipePage);
-
+/// //////////////////////////
+app.use('/googleAuth', GoogleRouter);
 
 // Если HTTP-запрос дошёл до этой строчки, значит ни один из ранее встречаемых рутов не ответил
 // на запрос.Это значит, что искомого раздела просто нет на сайте.Для таких ситуаций используется
@@ -64,7 +67,7 @@ app.use('/recipe', RecipePage);
 app.use((req, res, next) => {
   const error = createError(
     404,
-    'Запрашиваемой страницы не существует на сервере.'
+    'Запрашиваемой страницы не существует на сервере.',
   );
   next(error);
 });
@@ -84,7 +87,6 @@ app.use((err, req, res) => {
     error = {};
   }
 
-
   // Записываем информацию об ошибке и сам объект ошибки в специальные переменные,
   // доступные на сервере глобально, но только в рамках одного HTTP - запроса.
   res.locals.message = err.message;
@@ -99,8 +101,6 @@ app.use((err, req, res) => {
   res.write('<!DOCTYPE html>');
   res.end(html);
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`server started on http://localhost:${PORT}`);
