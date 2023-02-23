@@ -18,18 +18,79 @@ const logindiv = document.getElementById('logindiv');
 const signupdiv = document.getElementById('signupdiv');
 
 const sortBtnParent = document.getElementById('sortButtons');
+const sortBtnParentFav = document.getElementById('sortButtonsFav');
 
 const recipesContainer = document.getElementById('containerRecipes');
+const recipesContainerFav = document.getElementById('containerRecipesFav');
 
 recipesContainer?.addEventListener('click', async (event) => {
+  // console.log(event.target.dataset === recipe);
+
   const recipeId = event.target.dataset.recipe;
   const cookingTime = event.target.dataset.timecook;
-  const favourite = await fetch('/user/addFavourite', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ recipeId, cookingTime }),
-  });
+  const ingredients = event.target.dataset.ingredientscount;
 
+  if (recipeId) {
+    const favourite = await fetch('/user/addFavourite', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ recipeId, cookingTime, ingredients }),
+    });
+  }
+});
+
+sortBtnParentFav?.addEventListener('click', async (event) => {
+  while (recipesContainerFav.firstChild) {
+    recipesContainerFav.removeChild(recipesContainerFav.firstChild);
+  }
+  if (event.target.id === 'sortByIngredientsFav') {
+    const response = await fetch('/recipes/showlist/sortByIngredientsFav');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
+      recipesContainerFav.appendChild(card);
+    });
+  }
+  if (event.target.id === 'sortByCookingFav') {
+    const response = await fetch('/recipes/showlist/sortByCookingFav');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
+      recipesContainerFav.appendChild(card);
+    });
+  }
 });
 
 sortBtnParent?.addEventListener('click', async (event) => {
@@ -157,7 +218,7 @@ modalWin?.addEventListener('click', async (e) => {
       });
       if (reg.status !== 200) {
         const data = await reg.json();
-        message.innerText = data.error;
+        message.innerText = data.err;
         signupdiv.appendChild(message);
       } else {
         reg.json();
@@ -178,9 +239,10 @@ modalWin?.addEventListener('click', async (e) => {
         body: JSON.stringify(formData),
       });
 
-      const dataerr = await login;
+      const dataerr = await login.json();
+
       if (login.status !== 200) {
-        message.innerText = dataerr.err;
+        message.innerText = dataerr.err.message;
         logindiv.appendChild(message);
       } else {
         window.location = '/';

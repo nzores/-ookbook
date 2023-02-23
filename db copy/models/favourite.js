@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   Favourite.init({
     name: DataTypes.STRING,
     ingredients: DataTypes.TEXT,
-    ingredientsCount: DataTypes.INTEGER,
     cookingTime: DataTypes.INTEGER,
     instructions: DataTypes.TEXT,
     image: DataTypes.TEXT,

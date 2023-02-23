@@ -8,20 +8,21 @@ const { TemporalRecipe, Favourite, Sequelize } = require('../../db/models');
 router.get('/:userid', UserPage);
 
 router.post('/addFavourite', async (req, res) => {
-  const { recipeId, cookingTime } = req.body;
+  const { recipeId, cookingTime, ingredients } = req.body;
+
   const myApiKey = process.env.MY_API_KEY;
 
-  const response = await fetch(
-    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`,
-    {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '0ba18b59ebmshe964789696d2bdfp1eecdejsna35aeedff2a5',
-        'X-RapidAPI-Host':
-          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-      },
-    }
-  );
+  // const response = await fetch(
+  //   `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`,
+  //   {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-RapidAPI-Key': '0ba18b59ebmshe964789696d2bdfp1eecdejsna35aeedff2a5',
+  //       'X-RapidAPI-Host':
+  //         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+  //     },
+  //   }
+  // );
   const oneRecipe = await response.json();
   const { extendedIngredients } = oneRecipe;
   const ingredintsText = extendedIngredients
@@ -30,6 +31,7 @@ router.post('/addFavourite', async (req, res) => {
   const oneFavourite = await Favourite.create({
     name: oneRecipe.title,
     ingredients: ingredintsText,
+    ingredientsCount: Number(ingredients),
     cookingTime: Number(cookingTime),
     instructions: oneRecipe.instructions,
     image: oneRecipe.image,

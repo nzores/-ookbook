@@ -7,15 +7,18 @@ exports.Recipe = async (req, res) => {
   const userid = req.session?.user?.id;
   const username = req.session?.user?.name;
 
-  //   const myApiKey = process.env.MY_API_KEY;
-  //   // тут нужно указать сколько рецептов мы хотим получить за один запрос
-  // const dishId = 10
-  //   // запрос к апи
+  const myApiKey = process.env.MY_API_KEY;
+  // тут нужно указать сколько рецептов мы хотим получить за один запрос
+  const dishId = 10;
+  // запрос к апи
 
-  //   const response = await fetch(` https://api.spoonacular.com/recipes/${dishId}/information?includeNutrition=false&apiKey=${myApiKey}`, {
+  // const response = await fetch(
+  //   ` https://api.spoonacular.com/recipes/${dishId}/information?includeNutrition=false&apiKey=${myApiKey}`,
+  //   {
   //     method: 'GET',
-  //     headers: {'Content-Type': 'application/json'}
-  //   });
+  //     headers: { 'Content-Type': 'application/json' },
+  //   }
+  // );
 
   let obj;
   const file = fs.readFile(

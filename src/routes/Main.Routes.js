@@ -6,7 +6,7 @@ const router = express.Router();
 
 const { MainPage } = require('../controllers/MainControllers');
 
-const { TemporalRecipe, Sequelize } = require('../../db/models');
+const { TemporalRecipe, Favourite, Sequelize } = require('../../db/models');
 
 router.get('/', MainPage);
 
@@ -39,6 +39,37 @@ router.get('/recipes/showlist/:sorted', async (req, res) => {
       }
       if (countRequest % 2 === 0) {
         const sortedByIngredients = await TemporalRecipe.findAll({
+          order: [['cookingTime', 'ASC']],
+        });
+        res.json(sortedByIngredients);
+      }
+    }
+
+    if (sorted === 'sortByIngredientsFav') {
+      countRequest += 1;
+      if (countRequest % 2 !== 0) {
+        const sortedByIngredients = await Favourite.findAll({
+          order: [['ingredientsCount', 'DESC']],
+        });
+        res.json(sortedByIngredients);
+      }
+      if (countRequest % 2 === 0) {
+        const sortedByIngredients = await Favourite.findAll({
+          order: [['ingredientsCount', 'ASC']],
+        });
+        res.json(sortedByIngredients);
+      }
+    }
+    if (sorted === 'sortByCookingFav') {
+      countRequest += 1;
+      if (countRequest % 2 !== 0) {
+        const sortedByIngredients = await Favourite.findAll({
+          order: [['cookingTime', 'DESC']],
+        });
+        res.json(sortedByIngredients);
+      }
+      if (countRequest % 2 === 0) {
+        const sortedByIngredients = await Favourite.findAll({
           order: [['cookingTime', 'ASC']],
         });
         res.json(sortedByIngredients);
