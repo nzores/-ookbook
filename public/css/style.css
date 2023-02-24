@@ -179,3 +179,62 @@ background-image: url(https://kartinkin.net/pics/uploads/posts/2022-08/166138007
 form {
 border-radius: "10px 20px 30px 40px/30px",
 }
+
+body {
+  background-image: url(https://klike.net/uploads/posts/2022-12/1670059829_3-36.jpg);
+}
+
+#navbar {
+background-image: url(https://kartinkin.net/pics/uploads/posts/2022-08/1661380072_60-kartinkin-net-p-fon-dlya-prezentatsii-menyu-krasivo-63.jpg);
+}
+
+#entryBtn, #regBtn, #exitBtn, #privateNote {
+  font-size: 200%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 150px;
+
+}
+
+#signupdiv, #logindiv {
+  background-image: url(http://bpic.588ku.com/back_pic/04/70/67/5258997fa431d22.jpg!/fh/300/quality/90/unsharp/true/compress/true);
+}
+
+form {
+border-radius: "10px 20px 30px 40px/30px",
+}
+
+
+
+.favInputRec {
+  position: absolute;
+  top: 10%;
+  left: 70%;  
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.heartRec {
+  position: absolute;
+  top: 10%;
+  left: 70%; 
+  width: 40px;
+  height: 40px;
+}
+
+.trashRec {
+  position: absolute;
+  top: 20px;
+  left: 60px; 
+  width: 40px;
+  height: 40px;
+}
+
+.trashContRec {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}

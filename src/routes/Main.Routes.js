@@ -142,12 +142,16 @@ router.get('/recipes/more', async (req, res) => {
     nonDuplicates.forEach(async (el) => {
       await TemporalRecipe.create(el);
     });
+    const allRecordsFinal = await TemporalRecipe.findAll();
+    const recipesFav = await Favourite.findAll();
 
-    res.json(nonDuplicates);
+    const username = req.session?.user?.name;
+    
+
+    res.json({ nonDuplicates, allRecordsFinal, recipesFav, username });
   } catch (error) {
     console.error(error);
   }
 });
-
 
 module.exports = router;
