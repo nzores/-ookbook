@@ -59,7 +59,7 @@ app.use('/auth', authRoutes);
 app.use('/user', UserPage);
 app.use('/recipe', RecipePage);
 /// //////////////////////////
-app.use('/googleAuth', GoogleRouter);
+// app.use('/googleAuth', GoogleRouter);
 
 // Если HTTP-запрос дошёл до этой строчки, значит ни один из ранее встречаемых рутов не ответил
 // на запрос.Это значит, что искомого раздела просто нет на сайте.Для таких ситуаций используется

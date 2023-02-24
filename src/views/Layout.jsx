@@ -19,6 +19,11 @@ function Layout({ children, username, userid }) {
         <link rel="stylesheet" href="/css/style.css" />
         <script defer src="/js/application.js" />
 
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" />
+        <script src="/js/google-translate.js" />
+        <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit" />
+
+
         <title>Recipes</title>
       </head>
       <Navbar username={username} userid={userid} />
@@ -28,6 +33,10 @@ function Layout({ children, username, userid }) {
           <Registration />
           <Login />
         </div>
+        <div class="language">
+   <img src="/image/lang__ru.png" alt="ru" data-google-lang="ru" class="language__img"/>
+   <img src="/image/lang__en.png" alt="en" data-google-lang="en"/>
+</div>
       </body>
     </html>
   );
