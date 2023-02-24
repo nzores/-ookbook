@@ -13,7 +13,19 @@ function Main({
         <button id="sortByIngredients">sort by count inredients</button>
         <button id="sortByCooking">sort by cooking time</button>
       </div>
-      <div className="container text-center">
+
+      <div id="containerRecipes">
+        {recipes &&
+          recipes.map((el) => (
+            <div key={el.recipeId} data-recipe={el.recipeId}>
+              <h2>{el.name}</h2>
+              <h2>count ingrediants {el.ingredientsCount} unit/s</h2>
+              <h2>cooking time {el.cookingTime} min</h2>
+              <h3>{el.image}</h3>
+              <a href={`/recipe/${el.recipeId}`}>click</a>
+            </div>
+          ))}
+     <div className="container text-center">
         <div className="row align-items-start" id="containerRecipes">
           {recipes
             && recipes.map((el) => (
@@ -109,6 +121,7 @@ function Main({
         {/* <div id="spinner" className="spinner">
           <div />
         </div> */}
+      </div>
       </div>
     </Layout>
   );
