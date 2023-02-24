@@ -14,7 +14,7 @@ function Main({ username, recipes, userid }) {
         <button id="sortByIngredients">sort by count inredients</button>
         <button id="sortByCooking">sort by cooking time</button>
       </div>
-<<<<<<< HEAD
+
       <div id="containerRecipes">
         {recipes &&
           recipes.map((el) => (
@@ -26,8 +26,7 @@ function Main({ username, recipes, userid }) {
               <a href={`/recipe/${el.recipeId}`}>click</a>
             </div>
           ))}
-=======
-      <div className="container text-center">
+     <div className="container text-center">
         <div className="row align-items-start" id="containerRecipes">
           {recipes
             && recipes.map((el) => (
@@ -74,7 +73,7 @@ function Main({ username, recipes, userid }) {
         <div id="spinner" className="spinner">
           <div />
         </div>
->>>>>>> 221fb7b57883ade198b739497abce2c78b96ef64
+{'>'}
       </div>
 
       
