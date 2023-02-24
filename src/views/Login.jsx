@@ -4,10 +4,10 @@ module.exports = function Login() {
   return (
     <div id="modalOne" className="modal">
       <div className="modal-content">
-        <div className="bg-dk-green pad-t-2 pad-s-1 pad-b-8 mar-b-16 c-white">
-          <form name="login">
+        <div className="bg-dk-green pad-t-2 pad-s-1 pad-b-8 mar-b-16 c-white" id="loginmodal">
+          <form name="login" id="loginformm">
             <a className="close">&times;</a>
-            <h2>Вход на сайт</h2>
+            <h2 className="enter">Вход на сайт</h2>
 
             <div id='logindiv'>
               <label htmlFor="title-input" className="block mar-b-1">
@@ -18,7 +18,7 @@ module.exports = function Login() {
                 name="username"
                 type="text"
                 tabIndex="1"
-                className="block w-100 no-outline no-border pad-1 mar-b-2"
+                className="title-input"
               />
 
               <label htmlFor="title-input" className="block mar-b-1">
@@ -29,7 +29,7 @@ module.exports = function Login() {
                 name="password"
                 type="password"
                 tabIndex="1"
-                className="block w-100 no-outline no-border pad-1 mar-b-2"
+                className="title-input"
               />
             </div>
 
@@ -38,7 +38,8 @@ module.exports = function Login() {
               type="submit"
               value="Login"
               tabIndex="3"
-              className="block button w-100 mar-t-4 mar-b-3 pad-2 round-1 text-c center no-border no-outline"
+              className="generalButton"
+              // className="block button w-100 mar-t-4 mar-b-3 pad-2 round-1 text-c center no-border no-outline"
             />
           </form>
         </div>

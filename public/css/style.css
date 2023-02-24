@@ -162,7 +162,7 @@ body {
 }
 
 #navbar {
-background-image: image(public/image/nav);
+  background-image: url('../image/nav.jpg');
 }
 
 #entryBtn,
@@ -174,10 +174,10 @@ background-image: image(public/image/nav);
   margin-left: 150px;
 }
 
-#signupdiv,
+/* #signupdiv,
 #logindiv {
   background-image: url(http://bpic.588ku.com/back_pic/04/70/67/5258997fa431d22.jpg!/fh/300/quality/90/unsharp/true/compress/true);
-}
+} */
 
 form {
   border-radius: '10px 20px 30px 40px/30px';
@@ -238,4 +238,82 @@ border-radius: "10px 20px 30px 40px/30px",
   width: 40px;
   height: 40px;
   z-index: 1;
+}
+
+#loginmodal {
+  margin-right: 70px;
+  margin-left: 70px;
+  height: 400px;
+  opacity: 70%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#regmodall {
+  margin-right: 70px;
+  margin-left: 70px;
+  height: 504px;
+  opacity: 70%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#loginformm {
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#logindiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#signupdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#signupformm {
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.title-input {
+  height: 40px;
+  width: 75%;
+}
+
+
+.generalButton {
+  border-radius: 10px;
+  border: none;
+  width: 180px;
+  height: 30px;
+}
+
+.enter {
+  margin-left: 100px;
+}
+
+.close {
+  margin-left: 392px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.favInput:hover {
+  cursor: pointer;
 }

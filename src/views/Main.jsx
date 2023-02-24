@@ -1,38 +1,51 @@
 /* eslint-disable no-nested-ternary */
-const React = require("react");
+const React = require('react');
 
-const Layout = require("./Layout");
+const Layout = require('./Layout');
 
-function Main({
-  username, clearRecipes, userid, recipesFav,
-}) {
+function Main({ username, clearRecipes, userid, recipesFav }) {
   return (
     <Layout username={username} userid={userid}>
-      <h1>Main Page</h1>
+      <h1>Recipes</h1>
       <div id="sortButtons">
-        <button className="btn btn-light " id="sortByIngredients" >
-        Ingredients
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16" >
-  <path id='sortSVG' />
-</svg>
+        <h3>Sort by</h3>
+        <button className="btn btn-light " id="sortByIngredients">
+          Ingredients
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-sort-down"
+            viewBox="0 0 16 16"
+          >
+            <path id="sortSVG" />
+          </svg>
         </button>
         <button className="btn btn-light " id="sortByCooking">
-        Сooking time
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
-  <path id='sortSVGtwo' />
-</svg>
+          Сooking time
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-sort-down"
+            viewBox="0 0 16 16"
+          >
+            <path id="sortSVGtwo" />
+          </svg>
         </button>
       </div>
 
       <div className="container text-center">
         <div className="row align-items-start" id="containerRecipes">
-          {clearRecipes
-            && clearRecipes.map((el) => (
+          {clearRecipes &&
+            clearRecipes.map((el) => (
               <div className="col-sm">
                 <div
                   className="card"
                   key={el.recipeId}
-                  style={{ width: "18rem" }}
+                  style={{ width: '18rem' }}
                 >
                   <img src={el.image} className="card-img-top" alt="" />
                   <div
@@ -86,7 +99,7 @@ function Main({
                         </>
                       )
                     ) : (
-                      ""
+                      ''
                     )}
                     {/* <button
                       type="button"
@@ -109,7 +122,6 @@ function Main({
           <div />
         </div> */}
       </div>
-
     </Layout>
   );
 }
