@@ -15,11 +15,11 @@ module.exports = function Navbar({ children, username, userid }) {
         Main page
       </a>
       {username ? (
-        <p className="">
+        <h2 className="">
           Привет,
           {' '}
           {username}
-        </p>
+        </h2>
       ) : <></>}
       <div className="container-fluid justify-content-end">
         <ul className="navbar-nav  ">

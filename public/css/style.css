@@ -157,9 +157,31 @@ body {
   z-index: 1;
 }
 
-body {
-  background-image: url(https://klike.net/uploads/posts/2022-12/1670059829_3-36.jpg);
-}
+HTML {
+  height: 100%;
+  }
+BODY {
+  background: linear-gradient( 90deg,
+      rgba(255, 225, 132, .7) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(32, 113, 120, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(255, 150, 102, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(23, 76, 79, .1) 50%, rgba(255,255,255, 0) 50%);
+  background-size: 7em 7em, 5em 5em, 3em 3em, 1em 1em;
+  background-color: #F5E9BE;
+  font: 14px/1.4 'Trebuchet MS', Verdana, sans-serif;
+  }
+/* div {
+  border: 1px solid rgba(255,255,255,.1);
+  width: 10em;
+  height: 10em;
+  transform: rotate(45deg);
+  margin: 2em;
+  float: left;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%,rgba(0,0,0,0.05) 100%); 
+} */
 
 #navbar {
   background-image: url('../image/nav.jpg');
@@ -217,7 +239,7 @@ border-radius: "10px 20px 30px 40px/30px",
 
 .heartRec {
   position: absolute;
-  top: 10%;
+  top: 11%;
   left: 70%;
   width: 40px;
   height: 40px;
@@ -313,6 +335,13 @@ border-radius: "10px 20px 30px 40px/30px",
   height: 450px;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-width: 1em;
+}
+#card {
+  height: 70%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* border-width: 0; */
 }
 .btn.btn-light {
   margin-right: 10px;

@@ -20,7 +20,7 @@ function Recipe({
         data-timecook={oneRecipeData.readyInMinutes}
         data-ingredientsCount={oneRecipeData.ingredientsCount}
       >
-        <div className="card mx-auto col-md-6 col-10 mt-5 pt-4">
+        <div className="card mx-auto col-md-6 col-10 mt-5 pt-4" id="card">
           <h1 className="food">{oneRecipeData.title}</h1>
           <i className="fa fa-clock-o">
             cooking time :

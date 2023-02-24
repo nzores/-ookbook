@@ -25,10 +25,144 @@ const sortBtnParentFav = document.getElementById('sortButtonsFav');
 const recipesContainer = document.getElementById('containerRecipes');
 const recipesContainerFav = document.getElementById('containerRecipesFav');
 
+const recipesOne = document.getElementById('recipeOne');
+
 const upArrow = 'M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z';
 const downArrow = 'M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z';
 
+
+recipesOne?.addEventListener('click', async (event) => {
+  // console.log(event.target.dataset === recipe);
+
+  const recipeId = event.target.dataset.recipe;
+  const cookingTime = event.target.dataset.timecook;
+  const ingredients = event.target.dataset.ingredientscount;
+
+  // if (recipeId) {
+  //   const favourite = await fetch('/user/addFavourite', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ recipeId, cookingTime, ingredients }),
+  //   });
+  // }
+  if (event.target.className === 'favInputRec') {
+    // console.log('CLICK');
+    const recipe_Id = event.target.parentNode.dataset.recipe;
+    const cooking_Time = event.target.parentNode.dataset.timecook;
+    const ingredientsNum = event.target.parentNode.dataset.ingredientscount;
+    const property = event.target.parentNode;
+    // console.log(event.target.dataset.fav);
+    if (event.target.dataset.fav === 'true') {
+      console.log('CLICK');
+      console.log('1 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/deleteFav', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipeId: recipe_Id }),
+        });
+        if (response.status === 200) {
+          event.target.dataset.fav = 'false';
+          property.querySelector('#favPath').attributes.fill.value = 'none';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '20px';
+          //   event.target.textContent = 'Добавить в Избранное';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    } else {
+      console.log('2 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/addFavourite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipeId: recipe_Id,
+            cookingTime: cooking_Time,
+            ingredients: ingredientsNum,
+          }),
+        });
+
+        if (response.status === 200) {
+          event.target.dataset.fav = 'true';
+          property.querySelector('#favPath').attributes.fill.value = '#FF5353';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '0';
+          //   event.target.textContent = 'Убрать из Избранного';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    }
+  }
+});
+
 recipesContainer?.addEventListener('click', async (event) => {
+  // console.log(event.target.dataset === recipe);
+
+  const recipeId = event.target.dataset.recipe;
+  const cookingTime = event.target.dataset.timecook;
+  const ingredients = event.target.dataset.ingredientscount;
+
+  // if (recipeId) {
+  //   const favourite = await fetch('/user/addFavourite', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ recipeId, cookingTime, ingredients }),
+  //   });
+  // }
+  if (event.target.className === 'favInput') {
+    // console.log('CLICK');
+    const recipe_Id = event.target.parentNode.dataset.recipe;
+    const cooking_Time = event.target.parentNode.dataset.timecook;
+    const ingredientsNum = event.target.parentNode.dataset.ingredientscount;
+    const property = event.target.parentNode;
+    // console.log(event.target.dataset.fav);
+    if (event.target.dataset.fav === 'true') {
+      console.log('CLICK');
+      console.log('1 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/deleteFav', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipeId: recipe_Id }),
+        });
+        if (response.status === 200) {
+          event.target.dataset.fav = 'false';
+          property.querySelector('#favPath').attributes.fill.value = 'none';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '20px';
+          //   event.target.textContent = 'Добавить в Избранное';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    } else {
+      console.log('2 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/addFavourite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipeId: recipe_Id,
+            cookingTime: cooking_Time,
+            ingredients: ingredientsNum,
+          }),
+        });
+
+        if (response.status === 200) {
+          event.target.dataset.fav = 'true';
+          property.querySelector('#favPath').attributes.fill.value = '#FF5353';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '0';
+          //   event.target.textContent = 'Убрать из Избранного';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    }
+  }
+});
+
+
+recipesContainerFav?.addEventListener('click', async (event) => {
   // console.log(event.target.dataset === recipe);
 
   const recipeId = event.target.dataset.recipe;
@@ -144,8 +278,8 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
                     <path
                       id="favPath"
                       d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                      stroke-width="0"
-                      stroke="#FFF"
+                      stroke-width="3"
+                      stroke="#000"
                       fill="bfb599"
                     ></path>
                   </svg>
