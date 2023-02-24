@@ -17,39 +17,39 @@ exports.MainPage = async (req, res) => {
       const deleteRecipes = await TemporalRecipe.destroy({ truncate: true });
     }
 
-    // const response = await fetch(
-    //   `https://api.spoonacular.com/recipes/random?number=${20}&apiKey=${myApiKey}`,
-    //   {
-    //     method: 'GET',
-    //     headers: { 'Content-Type': 'application/json' },
-    //   }
-    // );
-
-    const userid = req.session?.user?.id;
-    // const allData = await response.json();
-
-    // const arrFromJson = allData.recipes;
-    let obj;
-    const file = fs.readFile(
-      './src/controllers/response-recipes100-food.json',
-      'utf8',
-      (err, data) => {
-        // console.log('data: ', data);
-        if (err) throw err;
-        obj = data;
+    const response = await fetch(
+      `https://api.spoonacular.com/recipes/random?number=${20}&apiKey=${myApiKey}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
       }
     );
-    const newObj = JSON.parse(await file);
 
-    const arrJson = newObj.recipes;
+    const userid = req.session?.user?.id;
+    const allData = await response.json();
 
-    let num1 = Math.floor(Math.random() * 51);
-    let num2 = Math.floor(Math.random() * 50) + 51;
+    const arrFromJson = allData.recipes;
+    // let obj;
+    // const file = fs.readFile(
+    //   './src/controllers/response-recipes100-food.json',
+    //   'utf8',
+    //   (err, data) => {
+    //     // console.log('data: ', data);
+    //     if (err) throw err;
+    //     obj = data;
+    //   }
+    // );
+    // const newObj = JSON.parse(await file);
 
-    num2 = Math.min(num2, num1 + 20);
-    num1 = Math.max(num1, num2 - 20);
+    // const arrJson = newObj.recipes;
 
-    const arrFromJson = arrJson.slice(num1, num2);
+    // let num1 = Math.floor(Math.random() * 51);
+    // let num2 = Math.floor(Math.random() * 50) + 51;
+
+    // num2 = Math.min(num2, num1 + 20);
+    // num1 = Math.max(num1, num2 - 20);
+
+    // const arrFromJson = arrJson.slice(num1, num2);
 
     // const arrayForDBFavourite = arrFromJson.map((el) => {
     //   const arrIngredients = el.extendedIngredients;

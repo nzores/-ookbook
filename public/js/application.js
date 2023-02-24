@@ -94,11 +94,15 @@ recipesContainer?.addEventListener('click', async (event) => {
 });
 
 sortBtnParentFav?.addEventListener('click', async (event) => {
-  if (event.target.id === 'sortByIngredientsFav' || event.target.id === 'sortByCookingFav') {
-    while (recipesContainer.firstChild) {
-      recipesContainer.removeChild(recipesContainer.firstChild);
+  if (
+    event.target.id === 'sortByIngredientsFav'
+    || event.target.id === 'sortByCookingFav'
+  ) {
+    while (recipesContainerFav.firstChild) {
+      recipesContainerFav.removeChild(recipesContainerFav.firstChild);
     }
-  } if (event.target.id === 'sortByIngredientsFav') {
+  }
+  if (event.target.id === 'sortByIngredientsFav') {
     const response = await fetch('/recipes/showlist/sortByIngredientsFav');
     const sortedRecipes = await response.json();
     const { sortedByIngredients, recipesFav, username } = sortedRecipes;
@@ -106,17 +110,15 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
       const card = document.createElement('div');
       card.classList.add('col-sm');
       card.innerHTML = `
-          <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+          <div class="card" key=${
   el.recipeId
-}>
+} style="width:18rem" data-recipe=${el.recipeId}>
           <img src=${el.image}  class="card-img-top"
           alt="" />
           <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
   el.cookingTime
 } data-ingredientsCount=${el.ingredientsCount}>
-          <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
-  el.name
-}</h2></a>
+          <a href=/recipe/${el.recipeId}><h2 class="card-title" >${`${el.name.slice(0, 30)}...`}</h2></a>
           <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
           <p>Cooking time ${el.cookingTime} min</p>
           <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
@@ -129,7 +131,7 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
                   <path
                     id="favPath"
                     d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                    stroke-width="5"
+                    stroke-width="0"
                     stroke="#FFF"
                     fill="#FF5353"
                   ></path>
@@ -142,9 +144,9 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
                     <path
                       id="favPath"
                       d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                      stroke-width="20"
+                      stroke-width="0"
                       stroke="#FFF"
-                      fill="none"
+                      fill="bfb599"
                     ></path>
                   </svg>
                   <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
@@ -157,7 +159,7 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
           </div>
             `;
 
-      recipesContainer.appendChild(card);
+      recipesContainerFav.appendChild(card);
     });
   }
 
@@ -177,9 +179,7 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
         <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
   el.cookingTime
 } data-ingredientsCount=${el.ingredientsCount}>
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
-  el.name
-}</h2></a>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${`${el.name.slice(0, 30)}...`}</h2></a>
         <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
         <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
@@ -192,7 +192,7 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
                 <path
                   id="favPath"
                   d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                  stroke-width="5"
+                  stroke-width="0"
                   stroke="#FFF"
                   fill="#FF5353"
                 ></path>
@@ -205,9 +205,9 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
                   <path
                     id="favPath"
                     d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                    stroke-width="20"
+                    stroke-width="0"
                     stroke="#FFF"
-                    fill="none"
+                    fill="bfb599"
                   ></path>
                 </svg>
                 <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
@@ -220,7 +220,7 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
         </div>
           `;
 
-      recipesContainer.appendChild(card);
+      recipesContainerFav.appendChild(card);
     });
   }
 });
@@ -237,7 +237,10 @@ sortBtnParent?.addEventListener('click', async (event) => {
     .getAttribute('d');
 
   //= =========
-  if (event.target.id === 'sortByIngredients' || event.target.id === 'sortByCooking') {
+  if (
+    event.target.id === 'sortByIngredients'
+    || event.target.id === 'sortByCooking'
+  ) {
     while (recipesContainer.firstChild) {
       recipesContainer.removeChild(recipesContainer.firstChild);
     }
@@ -258,9 +261,7 @@ sortBtnParent?.addEventListener('click', async (event) => {
         <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
   el.cookingTime
 } data-ingredientsCount=${el.ingredientsCount}>
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
-  el.name
-}</h2></a>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${`${el.name.slice(0, 30)}...`}</h2></a>
         <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
         <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
@@ -273,7 +274,7 @@ sortBtnParent?.addEventListener('click', async (event) => {
                 <path
                   id="favPath"
                   d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                  stroke-width="5"
+                  stroke-width="0"
                   stroke="#FFF"
                   fill="#FF5353"
                 ></path>
@@ -286,9 +287,9 @@ sortBtnParent?.addEventListener('click', async (event) => {
                   <path
                     id="favPath"
                     d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                    stroke-width="20"
+                    stroke-width="0"
                     stroke="#FFF"
-                    fill="none"
+                    fill="bfb599"
                   ></path>
                 </svg>
                 <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
@@ -332,9 +333,7 @@ sortBtnParent?.addEventListener('click', async (event) => {
         <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
   el.cookingTime
 } data-ingredientsCount=${el.ingredientsCount}>
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
-  el.name
-}</h2></a>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${`${el.name.slice(0, 30)}...`}</h2></a>
         <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
         <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
@@ -347,7 +346,7 @@ sortBtnParent?.addEventListener('click', async (event) => {
                 <path
                   id="favPath"
                   d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                  stroke-width="5"
+                  stroke-width="0"
                   stroke="#FFF"
                   fill="#FF5353"
                 ></path>
@@ -360,9 +359,9 @@ sortBtnParent?.addEventListener('click', async (event) => {
                   <path
                     id="favPath"
                     d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                    stroke-width="20"
+                    stroke-width="0"
                     stroke="#FFF"
-                    fill="none"
+                    fill="bfb599"
                   ></path>
                 </svg>
                 <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
@@ -405,6 +404,7 @@ window?.addEventListener('scroll', async () => {
       } = additionalRecipes;
       nonDuplicates.forEach((el) => {
         const card = document.createElement('div');
+        card.classList.add('col-sm');
         card.innerHTML = `
         <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
   el.recipeId
@@ -414,9 +414,7 @@ window?.addEventListener('scroll', async () => {
         <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
   el.cookingTime
 } data-ingredientsCount=${el.ingredientsCount}>
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
-  el.name
-}</h2></a>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${`${el.name.slice(0, 30)}...`}</h2></a>
         <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
         <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
@@ -429,7 +427,7 @@ window?.addEventListener('scroll', async () => {
                 <path
                   id="favPath"
                   d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                  stroke-width="5"
+                  stroke-width="0"
                   stroke="#FFF"
                   fill="#FF5353"
                 ></path>
@@ -442,9 +440,9 @@ window?.addEventListener('scroll', async () => {
                   <path
                     id="favPath"
                     d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                    stroke-width="20"
+                    stroke-width="0"
                     stroke="#FFF"
-                    fill="none"
+                    fill="#bfb599"
                   ></path>
                 </svg>
                 <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">

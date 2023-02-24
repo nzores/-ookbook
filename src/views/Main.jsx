@@ -7,7 +7,10 @@ function Main({ username, clearRecipes, userid, recipesFav }) {
   return (
     <Layout username={username} userid={userid}>
       <h1>Recipes</h1>
-      <div id="sortButtons">
+      
+
+      <div className="container text-center">
+      <div id="sortButtons" className="container text-left">
         <h3>Sort by</h3>
         <button className="btn btn-light " id="sortByIngredients">
           Ingredients
@@ -22,6 +25,7 @@ function Main({ username, clearRecipes, userid, recipesFav }) {
             <path id="sortSVG" />
           </svg>
         </button>
+        
         <button className="btn btn-light " id="sortByCooking">
           Сooking time
           <svg
@@ -36,9 +40,7 @@ function Main({ username, clearRecipes, userid, recipesFav }) {
           </svg>
         </button>
       </div>
-
-      <div className="container text-center">
-        <div className="row align-items-start" id="containerRecipes">
+        <div className="row align-items-center" id="containerRecipes">
           {clearRecipes &&
             clearRecipes.map((el) => (
               <div className="col-sm">
@@ -73,7 +75,7 @@ function Main({ username, clearRecipes, userid, recipesFav }) {
                             <path
                               id="favPath"
                               d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                              strokeWidth="5px"
+                              strokeWidth="0"
                               stroke="#FFF"
                               fill="#FF5353"
                             />
@@ -88,9 +90,9 @@ function Main({ username, clearRecipes, userid, recipesFav }) {
                             <path
                               id="favPath"
                               d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                              strokeWidth="20px"
+                              strokeWidth="0"
                               stroke="#FFF"
-                              fill="none"
+                              fill="#bfb599"
                             />
                           </svg>
                           <div className="favInput" data-fav="false">
