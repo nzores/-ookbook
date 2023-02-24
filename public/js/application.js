@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const message = document.createElement('p');
 
 const navbar = document.getElementById('navbar');
@@ -30,12 +31,63 @@ recipesContainer?.addEventListener('click', async (event) => {
   const cookingTime = event.target.dataset.timecook;
   const ingredients = event.target.dataset.ingredientscount;
 
-  if (recipeId) {
-    const favourite = await fetch('/user/addFavourite', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ recipeId, cookingTime, ingredients }),
-    });
+  // if (recipeId) {
+  //   const favourite = await fetch('/user/addFavourite', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ recipeId, cookingTime, ingredients }),
+  //   });
+  // }
+  if (event.target.className === 'favInput') {
+    // console.log('CLICK');
+    const recipe_Id = event.target.parentNode.dataset.recipe;
+    const cooking_Time = event.target.parentNode.dataset.timecook;
+    const ingredientsNum = event.target.parentNode.dataset.ingredientscount;
+    const property = event.target.parentNode;
+    // console.log(event.target.dataset.fav);
+    if (event.target.dataset.fav === 'true') {
+      console.log('CLICK');
+      console.log('1 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/deleteFav', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipeId: recipe_Id }),
+        });
+        if (response.status === 200) {
+          event.target.dataset.fav = 'false';
+          property.querySelector('#favPath').attributes.fill.value = 'none';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '20px';
+          //   event.target.textContent = 'Добавить в Избранное';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    } else {
+      console.log('2 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/addFavourite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipeId: recipe_Id,
+            cookingTime: cooking_Time,
+            ingredients: ingredientsNum,
+          }),
+        });
+
+        if (response.status === 200) {
+          event.target.dataset.fav = 'true';
+          property.querySelector('#favPath').attributes.fill.value = '#FF5353';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '0';
+          //   event.target.textContent = 'Убрать из Избранного';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    }
   }
 });
 
@@ -239,12 +291,12 @@ modalWin?.addEventListener('click', async (e) => {
         body: JSON.stringify(formData),
       });
 
-      const dataerr = await login.json();
-
       if (login.status !== 200) {
-        message.innerText = dataerr.err.message;
+        const dataerr = await login.json();
+        message.innerText = dataerr.err;
         logindiv.appendChild(message);
       } else {
+        login.json();
         window.location = '/';
       }
     } catch (err) {
