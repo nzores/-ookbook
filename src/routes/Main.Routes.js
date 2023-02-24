@@ -85,27 +85,37 @@ router.get('/recipes/showlist/:sorted', async (req, res) => {
 
 router.get('/recipes/more', async (req, res) => {
   try {
-    let obj;
-    const file = fs.readFile(
-      './src/controllers/response-recipes100-food.json',
-      'utf8',
-      (err, data) => {
-        // console.log('data: ', data);
-        if (err) throw err;
-        obj = data;
+    const myApiKey = process.env.MY_API_KEY;
+
+    const response = await fetch(
+      `https://api.spoonacular.com/recipes/random?number=${20}&apiKey=${myApiKey}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
       }
     );
-    const newObj = JSON.parse(await file);
 
-    const arrJson = newObj.recipes;
+    const userid = req.session?.user?.id;
+    const allData = await response.json();
 
-    let num1 = Math.floor(Math.random() * 51);
-    let num2 = Math.floor(Math.random() * 50) + 51;
+    const arrFromJson = allData.recipes;
 
-    num2 = Math.min(num2, num1 + 20);
-    num1 = Math.max(num1, num2 - 20);
+    // let obj;
+    // const file = fs.readFile(
+    //   './src/controllers/response-recipes100-food.json',
+    //   'utf8',
+    //   (err, data) => {
+    //     // console.log('data: ', data);
+    //     if (err) throw err;
+    //     obj = data;
+    //   }
+    // );
+    // const newObj = JSON.parse(await file);
 
-    const arrFromJson = arrJson.slice(num1, num2);
+    // const arrJson = newObj.recipes;
+
+    // let num1 = Math.floor(Math.random() * 51);
+    // let num2 = Math.floor(Math.random() * 50) + 51;
 
     const recipes = arrFromJson.map((el) => {
       if (el.readyInMinutes === 45) {

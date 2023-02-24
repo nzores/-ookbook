@@ -292,7 +292,6 @@ border-radius: "10px 20px 30px 40px/30px",
   width: 75%;
 }
 
-
 .generalButton {
   border-radius: 10px;
   border: none;
@@ -310,10 +309,23 @@ border-radius: "10px 20px 30px 40px/30px",
   text-align: center;
 }
 
+.card {
+  height: 450px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.btn.btn-light {
+  margin-right: 10px;
+}
+
 .close:hover {
   cursor: pointer;
 }
 
 .favInput:hover {
   cursor: pointer;
+}
+
+.favInput:active {
+  color: #e94b52;
 }

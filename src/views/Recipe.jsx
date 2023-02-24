@@ -9,30 +9,31 @@ function Recipe({
   // const { oneRecipeData,igredients} = props;
   // const countIngr = oneRecipeData[0].extendedIngredients
   // console.log('countIngr: ', oneRecipeData[0]);
+  const strippedText = oneRecipeData.instructions.replace(/(<([^>]+)>)/ig, '');
 
   return (
     <Layout username={username} userid={userid}>
       <div
         className="container-fluid"
         id="recipeOne"
-        data-recipe={oneRecipeData[0].id}
-        data-timecook={oneRecipeData[0].readyInMinutes}
-        data-ingredientsCount={oneRecipeData[0].ingredientsCount}
+        data-recipe={oneRecipeData.id}
+        data-timecook={oneRecipeData.readyInMinutes}
+        data-ingredientsCount={oneRecipeData.ingredientsCount}
       >
         <div className="card mx-auto col-md-6 col-10 mt-5 pt-4">
-          <h1 className="food">{oneRecipeData[0].title}</h1>
+          <h1 className="food">{oneRecipeData.title}</h1>
           <i className="fa fa-clock-o">
             cooking time :
             {' '}
-            {oneRecipeData[0].readyInMinutes}
+            {oneRecipeData.readyInMinutes}
           </i>
           <i className="fa fa-users">
             {' '}
             servings:
             {' '}
-            {oneRecipeData[0].servings}
+            {oneRecipeData.servings}
           </i>
-          <img src={oneRecipeData[0].image} className="img-fluid" alt="..." />
+          <img src={oneRecipeData.image} className="img-fluid" alt="..." />
           <div className="stars">
             <ul>
               {igredients.map((el) => (
@@ -40,12 +41,12 @@ function Recipe({
               ))}
             </ul>
           </div>
-          <p className="info">{oneRecipeData[0].instructions}</p>
+          <p className="info">{strippedText}</p>
         </div>
         <div className="trashContRec" />
         {username ? (
           recipesFav.find(
-            (elem) => elem.recipeId === oneRecipeData[0].id,
+            (elem) => elem.recipeId === oneRecipeData.id,
           ) ? (
             <>
               <svg className="heartRec" viewBox="0 0 256 256">
