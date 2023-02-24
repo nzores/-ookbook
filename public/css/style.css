@@ -122,3 +122,37 @@ body {
   margin: 50px auto;
   max-width: 30%;
 }
+
+.favInput {
+  position: absolute;
+  top: 20px;
+  right: 20px; 
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  top: 20px;
+  right: 20px; 
+  width: 40px;
+  height: 40px;
+}
+
+.trash {
+  position: absolute;
+  top: 20px;
+  left: 60px; 
+  width: 40px;
+  height: 40px;
+}
+
+.trashCont {
+  position: absolute;
+  top: 20px;
+  left: 226px; 
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}

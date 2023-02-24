@@ -1,45 +1,53 @@
-const React = require('react');
+const React = require("react");
 
 module.exports = function Navbar({ children, username, userid }) {
   return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-        <ul className="navbar-nav mr-auto">
-          <li className="pipe-separate t-light-green left">
-            <button className="nav-link" id="homeBtn" type="button">
-              Главная
-            </button>
-          </li>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light' id='navbar'>
+      <a class='navbar-brand' href='#'>
+        <img
+          src='/favicon.ico'
+          height='50'
+          alt='Logo'
+          loading='lazy'
+          id='homeBtn'
+        />
+      </a>
+      {username ? <p className=''>Привет, {username}</p> : <></>}
+      <div class='container-fluid justify-content-end'>
+        <ul className='navbar-nav  '>
           {username ? (
             <>
-              <li className="pipe-separate t-light-green left">
-                <a className="nav-link" id="privateNote" href={`/user/${userid}`}>
+              <li className='navbar-nav '>
+                <a
+                  className='navbar-brand'
+                  id='privateNote'
+                  href={`/user/${userid}`}
+                >
                   Избранное
                 </a>
               </li>
-              <li className="pipe-separate t-light-green left">
-                <p className="nav-link">Привет, {username}</p>
-              </li>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="exitBtn" type="button">
+              <li className='navbar-nav '>
+                <a className='navbar-brand text-danger' href='#' id='exitBtn'>
                   Выйти
-                </button>
+                </a>
               </li>
             </>
           ) : (
             <>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="entryBtn" type="button">
+              <li className='navbar-nav '>
+                <a className='navbar-brand ' href='#' id='entryBtn'>
                   Войти
-                </button>
+                </a>
               </li>
-              <li className="pipe-separate t-light-green left">
-                <button className="nav-link" id="regBtn" type="button">
+              <li className='navbar-nav '>
+                <a className='navbar-brand' href='#' id='regBtn'>
                   Регистрация
-                </button>
+                </a>
               </li>
             </>
           )}
         </ul>
-      </nav>
+      </div>
+    </nav>
   );
 };

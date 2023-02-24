@@ -1,30 +1,4 @@
-// // we will add this content, replace for anything you want to add
-// const more = '<div style="height: 1000px; background: #EEE;"></div>';
-
-// const wrapper = document.getElementsByClassName('card');
-// const content = document.getElementsByClassName('icon');
-// const test = document.getElementsByClassName('text');
-// content.innerHTML = more;
-
-// // cross browser addEvent, today you can safely use just addEventListener
-// function addEvent(obj, ev, fn) {
-//   if (obj.addEventListener) obj.addEventListener(ev, fn, false);
-//   else if (obj.attachEvent) obj.attachEvent(`on${ev}`, fn);
-// }
-
-// // this is the scroll event handler
-// function scroller() {
-//   // print relevant scroll info
-//   test.innerHTML = `${wrapper.scrollTop}+${wrapper.offsetHeight}+100>${content.offsetHeight}`;
-
-//   // add more contents if user scrolled down enough
-//   if (wrapper.scrollTop + wrapper.offsetHeight + 100 > content.offsetHeight) {
-//     content.innerHTML += more;
-//   }
-// }
-
-// // hook the scroll handler to scroll event
-// addEvent(wrapper, 'scroll', scroller);
+/* eslint-disable camelcase */
 const message = document.createElement('p');
 
 const navbar = document.getElementById('navbar');
@@ -45,8 +19,131 @@ const logindiv = document.getElementById('logindiv');
 const signupdiv = document.getElementById('signupdiv');
 
 const sortBtnParent = document.getElementById('sortButtons');
+const sortBtnParentFav = document.getElementById('sortButtonsFav');
 
 const recipesContainer = document.getElementById('containerRecipes');
+const recipesContainerFav = document.getElementById('containerRecipesFav');
+
+recipesContainer?.addEventListener('click', async (event) => {
+  // console.log(event.target.dataset === recipe);
+
+  const recipeId = event.target.dataset.recipe;
+  const cookingTime = event.target.dataset.timecook;
+  const ingredients = event.target.dataset.ingredientscount;
+
+  // if (recipeId) {
+  //   const favourite = await fetch('/user/addFavourite', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ recipeId, cookingTime, ingredients }),
+  //   });
+  // }
+  if (event.target.className === 'favInput') {
+    // console.log('CLICK');
+    const recipe_Id = event.target.parentNode.dataset.recipe;
+    const cooking_Time = event.target.parentNode.dataset.timecook;
+    const ingredientsNum = event.target.parentNode.dataset.ingredientscount;
+    const property = event.target.parentNode;
+    // console.log(event.target.dataset.fav);
+    if (event.target.dataset.fav === 'true') {
+      console.log('CLICK');
+      console.log('1 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/deleteFav', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipeId: recipe_Id }),
+        });
+        if (response.status === 200) {
+          event.target.dataset.fav = 'false';
+          property.querySelector('#favPath').attributes.fill.value = 'none';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '20px';
+          //   event.target.textContent = 'Добавить в Избранное';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    } else {
+      console.log('2 if', event.target.dataset.fav);
+      try {
+        const response = await fetch('/user/addFavourite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipeId: recipe_Id,
+            cookingTime: cooking_Time,
+            ingredients: ingredientsNum,
+          }),
+        });
+
+        if (response.status === 200) {
+          event.target.dataset.fav = 'true';
+          property.querySelector('#favPath').attributes.fill.value = '#FF5353';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '0';
+          //   event.target.textContent = 'Убрать из Избранного';
+        }
+      } catch (error) {
+        console.log('Error Favorite', error);
+      }
+    }
+  }
+});
+
+sortBtnParentFav?.addEventListener('click', async (event) => {
+  while (recipesContainerFav.firstChild) {
+    recipesContainerFav.removeChild(recipesContainerFav.firstChild);
+  }
+  if (event.target.id === 'sortByIngredientsFav') {
+    const response = await fetch('/recipes/showlist/sortByIngredientsFav');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
+      recipesContainerFav.appendChild(card);
+    });
+  }
+  if (event.target.id === 'sortByCookingFav') {
+    const response = await fetch('/recipes/showlist/sortByCookingFav');
+    const sortedRecipes = await response.json();
+    sortedRecipes.forEach((el) => {
+      const card = document.createElement('div');
+      card.innerHTML = `
+      <div class="col-sm">
+      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+      <img src=${el.image}  class="card-img-top"
+      alt="" />
+      <div class="card-body">
+      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+      <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
+      <p>Cooking time ${el.cookingTime} min</p>
+      <button type="button" class="btn btn-outline-primary">Unlike</button>
+      <button type="button" class="btn btn-primary">Like</button>
+      
+      </div>
+      </div>
+      </div>
+        `;
+      recipesContainerFav.appendChild(card);
+    });
+  }
+});
 
 sortBtnParent?.addEventListener('click', async (event) => {
   while (recipesContainer.firstChild) {
@@ -108,8 +205,6 @@ window?.addEventListener('scroll', async () => {
       const response = await fetch('/recipes/more');
 
       const additionalRecipes = await response.json();
-      // const spinner = document.getElementById('spinner');
-      // spinner.style.display = 'block';
       additionalRecipes.forEach((el) => {
         const card = document.createElement('div');
         card.innerHTML = `
@@ -130,9 +225,6 @@ window?.addEventListener('scroll', async () => {
           `;
 
         recipesContainer.appendChild(card);
-        // setTimeout(() => {
-        //   spinner.style.display = 'none';
-        // }, 1500);
       });
     }
   } catch (error) {
@@ -141,7 +233,6 @@ window?.addEventListener('scroll', async () => {
 });
 
 navbar?.addEventListener('click', async (e) => {
-  console.log(e.target.id)
   if (e.target.id === 'entryBtn') {
     entryModalWindow.style.display = 'block';
   }
@@ -179,7 +270,7 @@ modalWin?.addEventListener('click', async (e) => {
       });
       if (reg.status !== 200) {
         const data = await reg.json();
-        message.innerText = data.error;
+        message.innerText = data.err;
         signupdiv.appendChild(message);
       } else {
         reg.json();
@@ -200,11 +291,12 @@ modalWin?.addEventListener('click', async (e) => {
         body: JSON.stringify(formData),
       });
 
-      const dataerr = await login;
       if (login.status !== 200) {
+        const dataerr = await login.json();
         message.innerText = dataerr.err;
         logindiv.appendChild(message);
       } else {
+        login.json();
         window.location = '/';
       }
     } catch (err) {
