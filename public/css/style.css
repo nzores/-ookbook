@@ -162,7 +162,7 @@ body {
 }
 
 #navbar {
-  background-image: url(https://kartinkin.net/pics/uploads/posts/2022-08/1661380072_60-kartinkin-net-p-fon-dlya-prezentatsii-menyu-krasivo-63.jpg);
+background-image: image(public/image/nav);
 }
 
 #entryBtn,
