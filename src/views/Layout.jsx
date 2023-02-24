@@ -1,6 +1,9 @@
 const React = require('react');
+const Navbar = require('./Navbar');
+const Registration = require('./Register');
+const Login = require('./Login');
 
-function Layout({ children }) {
+function Layout({ children, username, userid }) {
   return (
     <html lang="en">
       <head>
@@ -13,11 +16,28 @@ function Layout({ children }) {
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossOrigin="anonymous"
         />
-        <script defer src="js/application.js" />
-        <script defer src="css/style.css" />
-        <title>Document</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <script defer src="/js/application.js" />
+
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" />
+        <script src="/js/google-translate.js" />
+        <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit" />
+
+
+        <title>Recipes</title>
       </head>
-      <body>{children}</body>
+      <Navbar username={username} userid={userid} />
+      <body>
+        {children}
+        <div id="modalWin">
+          <Registration />
+          <Login />
+        </div>
+        <div class="language">
+   <img src="/image/lang__ru.png" alt="ru" data-google-lang="ru" class="language__img"/>
+   <img src="/image/lang__en.png" alt="en" data-google-lang="en"/>
+</div>
+      </body>
     </html>
   );
 }

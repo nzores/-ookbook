@@ -10,22 +10,33 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      ingridients: {
+      ingredients: {
         type: Sequelize.TEXT,
       },
-      timeToCook: {
+      cookingTime: {
         type: Sequelize.INTEGER,
       },
-      instruction: {
+      instructions: {
+        type: Sequelize.TEXT,
+      },
+      image: {
         type: Sequelize.TEXT,
       },
       userId: {
         type: Sequelize.INTEGER,
         references: { model: 'Users', key: 'id' },
       },
-      recipeApiId: {
+      recipeId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+      },
+      countIngr : {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
       },
       createdAt: {
         allowNull: false,

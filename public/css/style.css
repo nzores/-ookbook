@@ -1,26 +1,24 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+/* @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-// VARIABLES
-$bg: url("https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg")
+bg: url('https://wallpaperscraft.com/image/coffee_coffee_beans_cupcake_candy_93301_1920x1080.jpg')
   no-repeat center;
-$food: url("http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg")
+food: url('http://img.taste.com.au/UZVXAdo7/taste/2016/11/chinese-egg-noodle-and-vegetable-stir-fry-94186-1.jpeg')
   no-repeat center;
 
-// FONT
-$font: "Roboto", sans-serif;
+font: 'Roboto', sans-serif;
 
 // COLORS
-$white: #fff;
-$black: #212129;
-$gray: #9b9b9b;
-$heart: #17bebb;
-$star: #ffe500;
-$button: #ef3e36;
+white: #fff;
+black: #212129;
+gray: #9b9b9b;
+heart: #17bebb;
+star: #ffe500;
+button: #ef3e36;
 
 * {
   margin: 0;
   padding: 0;
-  font-family: $font;
+  font-family: font;
   list-style-type: none;
   text-decoration: none;
   -webkit-box-sizing: border-box;
@@ -39,35 +37,35 @@ body {
 }
 
 body {
-  background: $bg;
+  background: bg;
 }
 
 .card {
   position: relative;
-  background: $white;
+  background: white;
   max-width: 500px;
   margin: 20px auto;
   box-shadow: 0px 0px 30px 2px #000;
   .header {
-    background: $food;
+    background: food;
     background-size: cover;
     min-height: 350px;
     .icon a .fa-heart-o {
       position: absolute;
       left: 85%;
       bottom: 30.7%;
-      background: $heart;
-      color: $white;
+      background: heart;
+      color: white;
       font-size: 1.3em;
       font-weight: bold;
       padding: 15px;
       border-radius: 50%;
-      box-shadow: 0px 5px 30px 1px $heart;
+      box-shadow: 0px 5px 30px 1px heart;
     }
   }
   .text {
     .food {
-      color: $black;
+      color: black;
       text-align: left;
       font-weight: normal;
       text-transform: uppercase;
@@ -75,17 +73,17 @@ body {
       margin: 5px 30px;
     }
     .fa-clock-o {
-      color: $gray;
+      color: gray;
       margin: 0 30px;
     }
     .fa-users {
-      color: $gray;
+      color: gray;
     }
   }
   .stars {
     margin: 10px 30px;
     li a i {
-      color: $star;
+      color: star;
     }
   }
   .info {
@@ -93,8 +91,8 @@ body {
   }
   a.btn {
     display: block;
-    background: $button;
-    color: $white;
+    background: button;
+    color: white;
     position: relative;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -102,8 +100,261 @@ body {
     padding: 10px;
     transition: 250ms;
     &:hover {
-      background: $heart;
+      background: heart;
       transition: 250ms;
     }
   }
+} */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 8;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  margin: 50px auto;
+  max-width: 30%;
+}
+
+.favInput {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.trash {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 40px;
+  height: 40px;
+}
+
+.trashCont {
+  position: absolute;
+  top: 20px;
+  left: 226px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+HTML {
+  height: 100%;
+  }
+BODY {
+  background: linear-gradient( 90deg,
+      rgba(255, 225, 132, .7) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(32, 113, 120, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(255, 150, 102, .3) 50%, rgba(255,255,255, 0) 50%),
+    linear-gradient( 90deg,
+      rgba(23, 76, 79, .1) 50%, rgba(255,255,255, 0) 50%);
+  background-size: 7em 7em, 5em 5em, 3em 3em, 1em 1em;
+  background-color: #F5E9BE;
+  font: 14px/1.4 'Trebuchet MS', Verdana, sans-serif;
+  }
+/* div {
+  border: 1px solid rgba(255,255,255,.1);
+  width: 10em;
+  height: 10em;
+  transform: rotate(45deg);
+  margin: 2em;
+  float: left;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%,rgba(0,0,0,0.05) 100%); 
+} */
+
+#navbar {
+  background-image: url('../image/nav.jpg');
+}
+
+#entryBtn,
+#regBtn,
+#exitBtn,
+#privateNote {
+  font-size: 200%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 150px;
+}
+
+/* #signupdiv,
+#logindiv {
+  background-image: url(http://bpic.588ku.com/back_pic/04/70/67/5258997fa431d22.jpg!/fh/300/quality/90/unsharp/true/compress/true);
+} */
+
+form {
+  border-radius: '10px 20px 30px 40px/30px';
+}
+/* 
+body {
+  background-image: url(https://klike.net/uploads/posts/2022-12/1670059829_3-36.jpg);
+}
+
+#navbar {
+background-image: url(https://kartinkin.net/pics/uploads/posts/2022-08/1661380072_60-kartinkin-net-p-fon-dlya-prezentatsii-menyu-krasivo-63.jpg);
+}
+
+#entryBtn, #regBtn, #exitBtn, #privateNote {
+  font-size: 200%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 150px;
+
+}
+
+#signupdiv, #logindiv {
+  background-image: url(http://bpic.588ku.com/back_pic/04/70/67/5258997fa431d22.jpg!/fh/300/quality/90/unsharp/true/compress/true);
+}
+
+form {
+border-radius: "10px 20px 30px 40px/30px",
+} */
+
+.favInputRec {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.heartRec {
+  position: absolute;
+  top: 11%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+}
+
+.trashRec {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 40px;
+  height: 40px;
+}
+
+.trashContRec {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+#loginmodal {
+  margin-right: 70px;
+  margin-left: 70px;
+  height: 400px;
+  opacity: 70%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#regmodall {
+  margin-right: 70px;
+  margin-left: 70px;
+  height: 504px;
+  opacity: 70%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#loginformm {
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#logindiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#signupdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#signupformm {
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.title-input {
+  height: 40px;
+  width: 75%;
+}
+
+.generalButton {
+  border-radius: 10px;
+  border: none;
+  width: 180px;
+  height: 30px;
+}
+
+.enter {
+  margin-left: 100px;
+}
+
+.close {
+  margin-left: 392px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.card {
+  height: 450px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-width: 1em;
+}
+#card {
+  height: 70%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* border-width: 0; */
+}
+.btn.btn-light {
+  margin-right: 10px;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.favInput:hover {
+  cursor: pointer;
+}
+
+.favInput:active {
+  color: #e94b52;
 }
