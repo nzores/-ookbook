@@ -227,49 +227,125 @@ sortBtnParentFav?.addEventListener('click', async (event) => {
   if (event.target.id === 'sortByIngredientsFav') {
     const response = await fetch('/recipes/showlist/sortByIngredientsFav');
     const sortedRecipes = await response.json();
-    sortedRecipes.forEach((el) => {
+    const { sortedByIngredients, recipesFav, username } = sortedRecipes;
+    sortedByIngredients.forEach((el) => {
       const card = document.createElement('div');
+      card.classList.add('col-sm');
       card.innerHTML = `
-      <div class="col-sm">
-      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
-      <img src=${el.image}  class="card-img-top"
-      alt="" />
-      <div class="card-body">
-      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
-      <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
-      <p>Cooking time ${el.cookingTime} min</p>
-      <button type="button" class="btn btn-outline-primary">Unlike</button>
-      <button type="button" class="btn btn-primary">Like</button>
-      
-      </div>
-      </div>
-      </div>
-        `;
-      recipesContainerFav.appendChild(card);
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
+        <img src=${el.image}  class="card-img-top"
+        alt="" />
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
+        <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+        <p>Cooking time ${el.cookingTime} min</p>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
+        
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
+        </div>
+        </div>
+          `;
+
+      recipesContainer.appendChild(card);
     });
   }
   if (event.target.id === 'sortByCookingFav') {
     const response = await fetch('/recipes/showlist/sortByCookingFav');
     const sortedRecipes = await response.json();
-    sortedRecipes.forEach((el) => {
+    const { sortedByIngredients, recipesFav, username } = sortedRecipes;
+    sortedByIngredients.forEach((el) => {
       const card = document.createElement('div');
+      card.classList.add('col-sm');
       card.innerHTML = `
-      <div class="col-sm">
-      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
-      <img src=${el.image}  class="card-img-top"
-      alt="" />
-      <div class="card-body">
-      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
-      <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
-      <p>Cooking time ${el.cookingTime} min</p>
-      <button type="button" class="btn btn-outline-primary">Unlike</button>
-      <button type="button" class="btn btn-primary">Like</button>
-      
-      </div>
-      </div>
-      </div>
-        `;
-      recipesContainerFav.appendChild(card);
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
+        <img src=${el.image}  class="card-img-top"
+        alt="" />
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
+        <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+        <p>Cooking time ${el.cookingTime} min</p>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
+        
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
+        </div>
+        </div>
+          `;
+
+      recipesContainer.appendChild(card);
     });
   }
 });
@@ -281,48 +357,124 @@ sortBtnParent?.addEventListener('click', async (event) => {
   if (event.target.id === 'sortByIngredients') {
     const response = await fetch('/recipes/showlist/sortByIngredients');
     const sortedRecipes = await response.json();
-    sortedRecipes.forEach((el) => {
+    const { sortedByIngredients, recipesFav, username } = sortedRecipes;
+    sortedByIngredients.forEach((el) => {
       const card = document.createElement('div');
+      card.classList.add('col-sm');
       card.innerHTML = `
-      <div class="col-sm">
-      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
-      <img src=${el.image}  class="card-img-top"
-      alt="" />
-      <div class="card-body">
-      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
-      <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
-      <p>Cooking time ${el.cookingTime} min</p>
-      <button type="button" class="btn btn-outline-primary">Unlike</button>
-      <button type="button" class="btn btn-primary">Like</button>
-      
-      </div>
-      </div>
-      </div>
-        `;
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
+        <img src=${el.image}  class="card-img-top"
+        alt="" />
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
+        <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+        <p>Cooking time ${el.cookingTime} min</p>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
+        
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
+        </div>
+        </div>
+          `;
+
       recipesContainer.appendChild(card);
     });
   }
   if (event.target.id === 'sortByCooking') {
     const response = await fetch('/recipes/showlist/sortByCooking');
     const sortedRecipes = await response.json();
-    sortedRecipes.forEach((el) => {
+    const { sortedByIngredients, recipesFav, username } = sortedRecipes;
+    sortedByIngredients.forEach((el) => {
       const card = document.createElement('div');
+      card.classList.add('col-sm');
       card.innerHTML = `
-      <div class="col-sm">
-      <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
-      <img src=${el.image}  class="card-img-top"
-      alt="" />
-      <div class="card-body">
-      <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
-      <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
-      <p>Cooking time ${el.cookingTime} min</p>
-      <button type="button" class="btn btn-outline-primary">Unlike</button>
-      <button type="button" class="btn btn-primary">Like</button>
-      
-      </div>
-      </div>
-      </div>
-        `;
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
+        <img src=${el.image}  class="card-img-top"
+        alt="" />
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
+        <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
+        <p>Cooking time ${el.cookingTime} min</p>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
+        
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
+        </div>
+        </div>
+          `;
+
       recipesContainer.appendChild(card);
     });
   }
@@ -353,7 +505,7 @@ window?.addEventListener('scroll', async () => {
         <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
   el.name
 }</h2></a>
-        <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
+        <p>Count ingrediants ${el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
         <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
         
