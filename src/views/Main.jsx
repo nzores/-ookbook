@@ -10,8 +10,18 @@ function Main({
     <Layout username={username} userid={userid}>
       <h1>Main Page</h1>
       <div id="sortButtons">
-        <button id="sortByIngredients">sort by count inredients</button>
-        <button id="sortByCooking">sort by cooking time</button>
+        <button className="btn btn-light " id="sortByIngredients" >
+        Ingredients
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16" >
+  <path id='sortSVG' />
+</svg>
+        </button>
+        <button className="btn btn-light " id="sortByCooking">
+        Сooking time
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+  <path id='sortSVGtwo' />
+</svg>
+        </button>
       </div>
 
       <div id="containerRecipes">
