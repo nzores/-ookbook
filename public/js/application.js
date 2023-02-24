@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 const message = document.createElement('p');
 
@@ -26,10 +27,7 @@ const recipesContainerFav = document.getElementById('containerRecipesFav');
 
 const recipeOnePage = document.getElementById('recipeOne');
 
-
 recipeOnePage?.addEventListener('click', async (event) => {
-  
-
   const recipeId = event.target.dataset.recipe;
   const cookingTime = event.target.dataset.timecook;
   const ingredients = event.target.dataset.ingredientscount;
@@ -60,8 +58,7 @@ recipeOnePage?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'false';
           property.querySelector('#favPath').attributes.fill.value = 'none';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '20px';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '20px';
           //   event.target.textContent = 'Добавить в Избранное';
         }
       } catch (error) {
@@ -83,8 +80,7 @@ recipeOnePage?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'true';
           property.querySelector('#favPath').attributes.fill.value = '#FF5353';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '0';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '0';
           //   event.target.textContent = 'Убрать из Избранного';
         }
       } catch (error) {
@@ -127,8 +123,7 @@ recipesContainer?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'false';
           property.querySelector('#favPath').attributes.fill.value = 'none';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '20px';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '20px';
           //   event.target.textContent = 'Добавить в Избранное';
         }
       } catch (error) {
@@ -150,8 +145,7 @@ recipesContainer?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'true';
           property.querySelector('#favPath').attributes.fill.value = '#FF5353';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '0';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '0';
           //   event.target.textContent = 'Убрать из Избранного';
         }
       } catch (error) {
@@ -194,8 +188,7 @@ recipesContainerFav?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'false';
           property.querySelector('#favPath').attributes.fill.value = 'none';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '20px';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '20px';
           //   event.target.textContent = 'Добавить в Избранное';
         }
       } catch (error) {
@@ -217,8 +210,7 @@ recipesContainerFav?.addEventListener('click', async (event) => {
         if (response.status === 200) {
           event.target.dataset.fav = 'true';
           property.querySelector('#favPath').attributes.fill.value = '#FF5353';
-          property.querySelector('#favPath').attributes['stroke-width'].value =
-            '0';
+          property.querySelector('#favPath').attributes['stroke-width'].value = '0';
           //   event.target.textContent = 'Убрать из Избранного';
         }
       } catch (error) {
@@ -342,21 +334,61 @@ window?.addEventListener('scroll', async () => {
       const response = await fetch('/recipes/more');
 
       const additionalRecipes = await response.json();
-      additionalRecipes.forEach((el) => {
+      const {
+        nonDuplicates, allRecordsFinal, recipesFav, username,
+      } = additionalRecipes;
+
+      nonDuplicates.forEach((el) => {
         const card = document.createElement('div');
+        card.classList.add('col-sm');
         card.innerHTML = `
-        <div class="col-sm">
-        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
         <img src=${el.image}  class="card-img-top"
         alt="" />
-        <div class="card-body">
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
         <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
-        <button type="button" class="btn btn-outline-primary">Unlike</button>
-        <button type="button" class="btn btn-primary">Like</button>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
         
-        </div>
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
         </div>
         </div>
           `;

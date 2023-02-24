@@ -14,18 +14,7 @@ function Main({
         <button id="sortByCooking">sort by cooking time</button>
       </div>
 
-      <div id="containerRecipes">
-        {recipes &&
-          recipes.map((el) => (
-            <div key={el.recipeId} data-recipe={el.recipeId}>
-              <h2>{el.name}</h2>
-              <h2>count ingrediants {el.ingredientsCount} unit/s</h2>
-              <h2>cooking time {el.cookingTime} min</h2>
-              <h3>{el.image}</h3>
-              <a href={`/recipe/${el.recipeId}`}>click</a>
-            </div>
-          ))}
-     <div className="container text-center">
+      <div className="container text-center">
         <div className="row align-items-start" id="containerRecipes">
           {clearRecipes
             && clearRecipes.map((el) => (
@@ -73,7 +62,7 @@ function Main({
                             <path
                               id="favPath"
                               d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
-                              strokeWidth="0"
+                              strokeWidth="5px"
                               stroke="#FFF"
                               fill="#FF5353"
                             />
@@ -122,7 +111,7 @@ function Main({
           <div />
         </div> */}
       </div>
-      </div>
+
     </Layout>
   );
 }

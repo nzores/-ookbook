@@ -161,7 +161,7 @@ body {
 
 .favInputRec {
   position: absolute;
-  top: 25%;
+  top: 10%;
   left: 70%;  
   width: 40px;
   height: 40px;
@@ -170,7 +170,7 @@ body {
 
 .heartRec {
   position: absolute;
-  top: 25%;
+  top: 10%;
   left: 70%; 
   width: 40px;
   height: 40px;
@@ -186,7 +186,7 @@ body {
 
 .trashContRec {
   position: absolute;
-  top: 25%;
+  top: 10%;
   left: 70%;
   width: 40px;
   height: 40px;
