@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const render = require('../lib/renderTemplate');
 const Main = require('../views/Main');
 require('dotenv').config();
-const { TemporalRecipe } = require('../../db/models');
+const { TemporalRecipe, Favourite } = require('../../db/models');
 
 exports.MainPage = async (req, res) => {
   // сюда нужно передавтаь свой ключ для доступа в апи
@@ -96,8 +96,9 @@ exports.MainPage = async (req, res) => {
     clearRecipes.forEach(async (el) => {
       await TemporalRecipe.create(el);
     });
+    const recipesFav = await Favourite.findAll();
 
-    render(Main, { recipes, userid }, res);
+    render(Main, { recipes, userid, recipesFav }, res);
   } catch (error) {
     console.error(error);
   }

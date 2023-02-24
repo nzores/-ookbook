@@ -12,17 +12,17 @@ router.post('/addFavourite', async (req, res) => {
 
   const myApiKey = process.env.MY_API_KEY;
 
-  // const response = await fetch(
-  //   `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`,
-  //   {
-  //     method: 'GET',
-  //     headers: {
-  //       'X-RapidAPI-Key': '0ba18b59ebmshe964789696d2bdfp1eecdejsna35aeedff2a5',
-  //       'X-RapidAPI-Host':
-  //         'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-  //     },
-  //   }
-  // );
+  const response = await fetch(
+    `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`,
+    {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '0ba18b59ebmshe964789696d2bdfp1eecdejsna35aeedff2a5',
+        'X-RapidAPI-Host':
+          'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+      },
+    }
+  );
   const oneRecipe = await response.json();
   const { extendedIngredients } = oneRecipe;
   const ingredintsText = extendedIngredients
@@ -38,6 +38,21 @@ router.post('/addFavourite', async (req, res) => {
     userId: Number(req.session?.user?.id),
     recipeId: Number(recipeId),
   });
+  res.json()
+});
+
+router.delete('/deleteFav', async (req, res) => {
+  const { recipeId } = req.body;
+  const userId = req.session?.user?.id;
+
+  if (await Favourite.destroy({ where: { recipeId, userId } })) {
+    res.json({ isDeleteSuccessful: true });
+  } else {
+    res.json({
+      isDeleteSuccessful: false,
+      errorMessage: 'Не удалось удалить запись из базы данных.',
+    });
+  }
 });
 
 module.exports = router;
