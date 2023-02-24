@@ -156,3 +156,39 @@ body {
   height: 40px;
   z-index: 1;
 }
+
+
+
+.favInputRec {
+  position: absolute;
+  top: 25%;
+  left: 70%;  
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.heartRec {
+  position: absolute;
+  top: 25%;
+  left: 70%; 
+  width: 40px;
+  height: 40px;
+}
+
+.trashRec {
+  position: absolute;
+  top: 20px;
+  left: 60px; 
+  width: 40px;
+  height: 40px;
+}
+
+.trashContRec {
+  position: absolute;
+  top: 25%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}

@@ -4,7 +4,7 @@ const React = require('react');
 const Layout = require('./Layout');
 
 function Main({
-  username, recipes, userid, recipesFav,
+  username, clearRecipes, userid, recipesFav,
 }) {
   return (
     <Layout username={username} userid={userid}>
@@ -15,8 +15,8 @@ function Main({
       </div>
       <div className="container text-center">
         <div className="row align-items-start" id="containerRecipes">
-          {recipes
-            && recipes.map((el) => (
+          {clearRecipes
+            && clearRecipes.map((el) => (
               <div className="col-sm">
                 <div
                   className="card"
