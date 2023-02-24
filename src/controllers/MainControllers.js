@@ -98,7 +98,7 @@ exports.MainPage = async (req, res) => {
     });
     const recipesFav = await Favourite.findAll();
 
-    render(Main, { recipes, userid, recipesFav }, res);
+    render(Main, { clearRecipes, userid, recipesFav }, res);
   } catch (error) {
     console.error(error);
   }

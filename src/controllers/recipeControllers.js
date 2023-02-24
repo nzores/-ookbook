@@ -3,6 +3,8 @@ const fs = require('fs').promises;
 const render = require('../lib/renderTemplate');
 const RecipePage = require('../views/Recipe');
 
+const { TemporalRecipe, Favourite } = require('../../db/models');
+
 exports.Recipe = async (req, res) => {
   const userid = req.session?.user?.id;
   const username = req.session?.user?.name;
@@ -43,7 +45,9 @@ exports.Recipe = async (req, res) => {
     servings: el.servings,
     image: el.image,
     instructions: el.instructions,
+    ingredientsCount: el.extendedIngredients.length
   }));
+  const recipesFav = await Favourite.findAll();
 
   render(
     RecipePage,
@@ -52,6 +56,7 @@ exports.Recipe = async (req, res) => {
       igredients,
       userid,
       username,
+      recipesFav,
     },
     res
   );
