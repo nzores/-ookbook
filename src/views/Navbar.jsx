@@ -27,7 +27,7 @@ module.exports = function Navbar({ children, username, userid }) {
                 </a>
               </li>
               <li className='navbar-nav '>
-                <a className='navbar-brand text-danger' href='#' id='exitBtn'>
+                <a className='navbar-brand text-danger' style={{color: 'black'}} href='#' id='exitBtn'>
                   Выйти
                 </a>
               </li>

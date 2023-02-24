@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 const message = document.createElement("p");
 
@@ -24,10 +25,8 @@ const sortBtnParentFav = document.getElementById("sortButtonsFav");
 const recipesContainer = document.getElementById("containerRecipes");
 const recipesContainerFav = document.getElementById("containerRecipesFav");
 
-const upArrow =
-  "M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z";
-const downArrow =
-  "M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z";
+const recipesContainer = document.getElementById('containerRecipes');
+const recipesContainerFav = document.getElementById('containerRecipesFav');
 
 recipesContainer?.addEventListener("click", async (event) => {
   // console.log(event.target.dataset === recipe);
@@ -60,10 +59,10 @@ recipesContainer?.addEventListener("click", async (event) => {
           body: JSON.stringify({ recipeId: recipe_Id }),
         });
         if (response.status === 200) {
-          event.target.dataset.fav = "false";
-          property.querySelector("#favPath").attributes.fill.value = "none";
-          property.querySelector("#favPath").attributes["stroke-width"].value =
-            "20px";
+          event.target.dataset.fav = 'false';
+          property.querySelector('#favPath').attributes.fill.value = 'none';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '20px';
           //   event.target.textContent = 'Добавить в Избранное';
         }
       } catch (error) {
@@ -83,10 +82,10 @@ recipesContainer?.addEventListener("click", async (event) => {
         });
 
         if (response.status === 200) {
-          event.target.dataset.fav = "true";
-          property.querySelector("#favPath").attributes.fill.value = "#FF5353";
-          property.querySelector("#favPath").attributes["stroke-width"].value =
-            "0";
+          event.target.dataset.fav = 'true';
+          property.querySelector('#favPath').attributes.fill.value = '#FF5353';
+          property.querySelector('#favPath').attributes['stroke-width'].value =
+            '0';
           //   event.target.textContent = 'Убрать из Избранного';
         }
       } catch (error) {
@@ -249,20 +248,55 @@ window?.addEventListener("scroll", async () => {
 
       const additionalRecipes = await response.json();
       additionalRecipes.forEach((el) => {
-        const card = document.createElement("div");
+        const card = document.createElement('div');
         card.innerHTML = `
-        <div class="col-sm">
-        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${el.recipeId}>
+        <div class="card" key=${el.recipeId} style="width:18rem" data-recipe=${
+  el.recipeId
+}>
         <img src=${el.image}  class="card-img-top"
         alt="" />
-        <div class="card-body">
-        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${el.name}</h2></a>
+        <div class="card-body" data-recipe=${el.recipeId} data-timecook=${
+  el.cookingTime
+} data-ingredientsCount=${el.ingredientsCount}>
+        <a href=/recipe/${el.recipeId}><h2 class="card-title" >${
+  el.name
+}</h2></a>
         <p>Count ingrediants {el.ingredientsCount} unit/s</p>      
         <p>Cooking time ${el.cookingTime} min</p>
-        <button type="button" class="btn btn-outline-primary">Unlike</button>
-        <button type="button" class="btn btn-primary">Like</button>
+        <div class="trashCont" style="position: absolute; top: 20px; left: 226px; width: 40px; height: 40px; z-index: 1;"></div>
         
-        </div>
+        ${
+  username
+    ? recipesFav.find((elem) => elem.recipeId === el.recipeId)
+      ? `
+              <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                <path
+                  id="favPath"
+                  d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                  stroke-width="5"
+                  stroke="#FFF"
+                  fill="#FF5353"
+                ></path>
+              </svg>
+              <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="true">
+              </div>
+             `
+      : `
+                <svg class="heart" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;" viewBox="0 0 256 256">
+                  <path
+                    id="favPath"
+                    d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                    stroke-width="20"
+                    stroke="#FFF"
+                    fill="none"
+                  ></path>
+                </svg>
+                <div class="favInput" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; z-index: 1;" data-fav="false">
+                </div>
+            `
+    : ''
+}
+        
         </div>
         </div>
           `;
