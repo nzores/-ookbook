@@ -42,7 +42,7 @@ function Main({
                     data-ingredientsCount={el.ingredientsCount}
                   >
                     <a href={`/recipe/${el.recipeId}`}>
-                      <h2 className="card-title">{el.name}</h2>
+                      <h2 className="card-title">{el.name.slice(0,30) + '...'}</h2>
                     </a>
                     <p>Count ingrediants {el.ingredientsCount} unit/s</p>
                     <p>Cooking time {el.cookingTime} min</p>
